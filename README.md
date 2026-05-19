@@ -1,4 +1,4 @@
-# Intro to Python
+# Getting started with Python
 
 (for non-MEDS students)
 

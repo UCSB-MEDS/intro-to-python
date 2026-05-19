@@ -1,0 +1,22 @@
+---
+title: "Getting Started with Python"
+author: 
+  - name: Kat Le
+    url: https://github.com/katleyq
+  - name: Sam Shanny-Csik
+    url: https://samanthacsik.github.io/
+date: May 27, 2026
+format: 
+  html:
+    theme: meds-website-styles.scss
+    mainfont: "Nunito"
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    smooth-scroll: true
+---
+
+<br>
+
+{{< include /sections/0-setup.qmd >}}
+

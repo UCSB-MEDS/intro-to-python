@@ -12,14 +12,124 @@ format:
 
 Please work through the following installations and configurations before attending the workshop:
 
-### 1. Check for Python & install, if necessary
+::: {.callout-note collapse="true"}
+
+## Installation instructions (collapsed to save space)
+
+### 1. Install Positron
+
+Positron is the newest data science IDE (**I**ntegrated **D**evelopment **E**nvironment) from [Posit](https://posit.co/){target="_blank"} (the makers of RStudio) that combines the best features of RStudio (e.g. the data explorer, plots pane, etc.) with the flexibility and multi-language support of VS Code (a general-purpose IDE and a popular envrionment for writing Python code). Download and install Positron following [these instructions](https://positron.posit.co/install.html){target="_blank"}.
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "100%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "positron.png"))
+```
+
+You can expand the features and capabilities of Positron by installing [extensions](https://positron.posit.co/extensions.html){target="_blank"}. It already comes bundled with those needed for this workshop (Quarto, Jupyter notebooks), but know that you can install additional extensions, as needed, from the Extensions menu in the Activity Bar.
+
+### 2. Install `Miniforge3`
+
+[`conda`](https://github.com/conda/conda){target="_blank"} is both a package installer and environment manager, built for data science work. We'll learn more about it (and use it!) during the workshop. `conda` can be installed via several distributions (i.e. bundled collections of software that are packaged and distributed together for easy installation). The most well-known, [Anaconda](https://www.anaconda.com/download){target="_blank"}, bundles thousands of pre-installed packages you may never use, and requires accepting a commercial license for organizational use. [`Miniforge3`](https://github.com/conda-forge/miniforge/){target="_blank"} is a free, minimal alternative that gives you `conda` without the bloat, so you install only what you need. Installing `Miniforge3` means you'll receive a base environment containing Python, the `conda` package manager, and their essential dependencies. Follow the appropriate instructions, below, to install `Miniforge3`:
 
 ::: {.panel-tabset}
 ## {{< fa brands apple >}} Mac
 
+1. **Select the appropriate `Miniforge3` release from [https://conda-forge.org/download/](https://conda-forge.org/download/){target="_blank"} to download** a shell script (`.sh` file) for installation:
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "100%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "miniforge-release.png"))
+```
+
+2. **Run your shell script in your Positron Terminal to install `Miniforge3`.** To do this:
+    -  **Make sure you're in your home directory.** Check to see where you are in your computer by typing `pwd` ("print working directory") in your Terminal. If you're already in your home directory, it should return something like, `/Users/your-user-name`. If you're *not* in your home directory, you can jump there by typing `cd ~` (`cd` stands for "change directory", and `~` is a shortcut for jumping home).
+    -  **Move into your `Downloads` folder,** where your shell script currently lives, by typing `cd Downloads` in your Terminal.
+    -  **Run your shell script** by typing `bash downloaded-file-name.sh` (mine was named, `Miniforge3-Darwin-arm64.sh`) in your Terminal.
+
+4. **Follow the prompts in your Terminal to complete the installation:**
+    - continue pressing ENTER until your reach the end of the license
+    - type `yes` to accept the license terms
+    - make sure to install it to your home directory (e.g. `Users/samanthacsik/miniforge3`) when prompted
+    - if asked if you want to update your shell profile to automatically initialize conda, type `yes`
+
 ## {{< fa brands windows >}} Windows
+
+1. **Select the appropriate `Miniforge3` release from [https://conda-forge.org/download/](https://conda-forge.org/download/){target="_blank"} to download** an executable (`.exe` file) for installation:
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "100%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "miniforge-release.png"))
+```
+
+2. **Double click on the downloaded `.exe` to begin the installation process.** Follow the prompts:
+
+  - Click **next** on the setup window: 
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "70%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "windows1.png"))
+```
+
+  - Install for **All Users**, then click **next**:
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "70%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "windows2.png"))
+```
+
+  - Check that the destination folder is listed as `C:\ProgramData\miniforge3`, then click **next**:
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "70%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "windows3.png"))
+```
+
+  - Make sure all three Advanced Installation Options are selected, then click **Install**:
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "70%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "windows4.png"))
+```
+
+  - Open up Miniforge Prompt:
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "70%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "windows5.png"))
+```
+
+  - Run `conda init`:
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "70%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "windows6.png"))
+```
 :::
-
-### 2. Install Positron & necessary extensions
-
-### 3. Install `miniforge3`
+:::

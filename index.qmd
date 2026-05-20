@@ -3,8 +3,12 @@ title: "Getting Started with Python"
 author: 
   - name: Kat Le
     url: https://github.com/katleyq
+    affiliation: Bren School of Envrionmental Science & Management
+    affiliation-url: https://bren.ucsb.edu/
   - name: Sam Shanny-Csik
     url: https://samanthacsik.github.io/
+    # affiliation: Bren School of Envrionmental Science & Management
+    # affiliation-url: https://bren.ucsb.edu/
 date: May 27, 2026
 format: 
   html:
@@ -19,4 +23,11 @@ format:
 <br>
 
 {{< include /sections/0-setup.qmd >}}
+
+{{< include /sections/1-slides.qmd >}}
+
+{{< include /sections/2-code.qmd >}}
+
+{{< include /sections/3-contribute.qmd >}}
+
 

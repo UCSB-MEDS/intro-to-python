@@ -18,6 +18,9 @@ format:
     toc-location: left
     toc-depth: 3
     smooth-scroll: true
+include-in-header:
+  - text: |
+     <link rel = "shortcut icon" href = "images/python-logo.png" />
 ---
 
 <br>

@@ -22,6 +22,14 @@ format:
 
 <br>
 
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: "25%"
+#| fig-align: "center"
+knitr::include_graphics(here::here("images", "python-logo.png"))
+```
+
 {{< include /sections/0-setup.qmd >}}
 
 {{< include /sections/1-slides.qmd >}}

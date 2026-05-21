@@ -1,4 +1,4 @@
-name: cmip6
+name: cmip6-env
 channels:
   - conda-forge
   - defaults
@@ -13,3 +13,4 @@ dependencies:
   - numpy
   - pandas
   - jupyter
+  - ipykernel

@@ -6,8 +6,6 @@
 library(tidyverse)
 
 #..........................import data...........................
-
-# data preprocessing 
 drought <- read_csv(here::here("exercises", "data", "drought.csv"))
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -31,7 +29,7 @@ drought_clean <- drought |>
   # add drought level conditions names ---- 
   mutate(drought_lvl_long = factor(drought_lvl,
                                    levels = c("D4", "D3", "D2", "D1","D0", "None"),
-                                   labels = c("D4 (Exceptional)", "(D3) Extreme",
+                                   labels = c("D4 (Exceptional)", "D3 (Extreme)",
                                        "D2 (Severe)", "D1 (Moderate)", 
                                        "D0 (Abnormaly Dry)", 
                                        "No Drought"))) |>
@@ -42,6 +40,7 @@ drought_clean <- drought |>
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##       create stacked area plot of CA drought conditions through time     ----
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 drought_clean |> 
   
   # remove drought_lvl "None" & filter for just CA ----

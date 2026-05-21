@@ -16,7 +16,7 @@ drought <- read_csv(here::here("exercises", "data", "drought.csv"))
 
 drought_clean <- drought |>
   
-  # Pivot table to be in tidy form ----
+  # pivot table to be in tidy form ----
   pivot_longer(cols = None:D4, names_to = "drought_lvl", values_to = "area_pct") |>
   
   # clean up col names ----
@@ -37,7 +37,7 @@ drought_clean <- drought |>
                                        "No Drought"))) |>
   
   # reorder cols ----
-  relocate(date, year, month, day, state_abb, drought_lvl, drought_lvl_long, area_pct)
+  relocate(date, state_abb, drought_lvl, drought_lvl_long, area_pct)
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##       create stacked area plot of CA drought conditions through time     ----
@@ -60,7 +60,7 @@ drought_clean |>
   
   # set x-axis breaks & remove padding between data and x-axis ----
   scale_x_date(breaks = scales::breaks_pretty(n = 13),
-                limits = as.Date(c("2000-01-01", "2026-12-31")),
+               limits = as.Date(c("2000-01-01", "2026-12-31")),
                expand = c(0,0)) +
 
   # set y-axis breaks & remove padding between data and y-axis & convert values to percentages ----
@@ -70,12 +70,6 @@ drought_clean |>
   
   # add title ----
   labs(title = "Drought area in California") +
-  
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-##                                                                            --
-##-------------------------  THEME CODE!-----------------------------
-##                                                                            --
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   # set theme minimal (includes major/minor grid lines, no axes) ----
   theme_minimal() +
@@ -108,6 +102,7 @@ drought_clean |>
     legend.key.width = unit(0.4, "cm"),
     legend.key.height = unit(0.25, "cm"),
     
+    # update plot background color & plot margins ----
     plot.background = element_rect(color = "#686868"),
     plot.margin = margin(t = 10, r = 40, b = 10, l = 40)
   )

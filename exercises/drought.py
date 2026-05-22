@@ -7,7 +7,7 @@ import pandas as pd
 from plotnine import *
 
 #..........................import data...........................
-drought = pd.read_csv("exercises/data/drought.csv")
+drought = pd.read_csv("data/drought.csv")
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##                            wrangle drought data                          ----

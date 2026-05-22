@@ -15,7 +15,7 @@ format:
 
 ### Exercise 2: Translating R to Python
 
-Let's say you already have this R code for reproducing the [US Drought Monitor](https://droughtmonitor.unl.edu/){target="_blank"}'s ["Drought area in California" visualization](https://en.wikipedia.org/wiki/Droughts_in_California#/media/File:Drought_area_in_California.svg){target="_blank"} (you can download the necessary data from [Google Drive](https://drive.google.com/file/d/1SQOUoCD9RZIpzm2rKyjKenRlMFiCKhny/view?usp=sharing){target="_blank"}):
+Let's say you already have some R code for reproducing the [US Drought Monitor](https://droughtmonitor.unl.edu/){target="_blank"}'s ["Drought area in California" visualization](https://en.wikipedia.org/wiki/Droughts_in_California#/media/File:Drought_area_in_California.svg){target="_blank"} (you can download the necessary data from [Google Drive](https://drive.google.com/file/d/1SQOUoCD9RZIpzm2rKyjKenRlMFiCKhny/view?usp=sharing){target="_blank"}), and you'd like to translate it to Python:
 
 ::: {.callout-note collapse="true"}
 ## Expand for R code
@@ -134,7 +134,44 @@ drought_clean |>
 ```
 :::
 
-And you'd like to translate it to Python. We'll approach this by:
+::: {.callout-important}
+## which approach should we recommend? export environment or create environment.yml first?
+:::
 
-1. Creating an environment from scratch 
-2. Leveraging GenAI to help us translate our code from R to Python
+1. **Start by creating a new `conda` environment from scratch:**
+
+- In your Positron Terminal, create an environment named `drought-env`
+
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+conda create -n drought-env python=X
+```
+
+- Activate your `drought-env` environment:
+
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+conda activate drought-env
+```
+
+- Install the necessary packages to your `drought-env` from the `conda-forge` channel (reminder: [conda-forge](https://conda-forge.org/docs/user/introduction/){target="_blank"} is a large repository of community-maintained Python packages):
+
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+conda install -c conda-forge pandas plotnine
+```
+
+- Optionally, export your envrionment so that others who may use your code can reproduce your environment:
+
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+# exports all currently installed packages and versions
+conda env export > environment.yml 
+
+# alternatively: only include packages that you explicitly installed, not their dependencies (more portable)
+conda env export --from-history > environment.yml
+```

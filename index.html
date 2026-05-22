@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="exercise-2-translating-r-to-python" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-2-translating-r-to-python">Exercise 2: Translating R to Python</h3>
-<p>Let’s say you already have this R code for reproducing the <a href="https://droughtmonitor.unl.edu/" target="_blank">US Drought Monitor</a>’s <a href="https://en.wikipedia.org/wiki/Droughts_in_California#/media/File:Drought_area_in_California.svg" target="_blank">“Drought area in California” visualization</a> (you can download the necessary data from <a href="https://drive.google.com/file/d/1SQOUoCD9RZIpzm2rKyjKenRlMFiCKhny/view?usp=sharing" target="_blank">Google Drive</a>):</p>
+<p>Let’s say you already have some R code for reproducing the <a href="https://droughtmonitor.unl.edu/" target="_blank">US Drought Monitor</a>’s <a href="https://en.wikipedia.org/wiki/Droughts_in_California#/media/File:Drought_area_in_California.svg" target="_blank">“Drought area in California” visualization</a> (you can download the necessary data from <a href="https://drive.google.com/file/d/1SQOUoCD9RZIpzm2rKyjKenRlMFiCKhny/view?usp=sharing" target="_blank">Google Drive</a>), and you’d like to translate it to Python:</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -467,11 +467,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>And you’d like to translate it to Python. We’ll approach this by:</p>
+<div class="callout callout-style-default callout-important callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>which approach should we recommend? export environment or create environment.yml first?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
 <ol type="1">
-<li>Creating an environment from scratch</li>
-<li>Leveraging GenAI to help us translate our code from R to Python</li>
+<li><strong>Start by creating a new <code>conda</code> environment from scratch:</strong></li>
 </ol>
+<ul>
+<li>In your Positron Terminal, create an environment named <code>drought-env</code></li>
+</ul>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> drought-env python=X</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ul>
+<li>Activate your <code>drought-env</code> environment:</li>
+</ul>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate drought-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ul>
+<li>Install the necessary packages to your <code>drought-env</code> from the <code>conda-forge</code> channel (reminder: <a href="https://conda-forge.org/docs/user/introduction/" target="_blank">conda-forge</a> is a large repository of community-maintained Python packages):</li>
+</ul>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge pandas plotnine</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ul>
+<li>Optionally, export your envrionment so that others who may use your code can reproduce your environment:</li>
+</ul>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># exports all currently installed packages and versions</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="op">&gt;</span> environment.yml </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># alternatively: only include packages that you explicitly installed, not their dependencies (more portable)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 </section>
 </section>
 <section id="contribute" class="level2">

@@ -10,17 +10,28 @@ format:
 
 ## {{< fa code title="code" >}} Let's write & run some Python code {#code}
 
-### Exercise 1: Running existing Python code
-Sometimes you'll receive Python code and an environment file (environment.yml or requirements.txt) from a collaborator. In this exercise, you will reproduce an environment and run a Python script. 
+### Exercise 0: Create a new local project {#exercise0}
 
-- Download the [`environment.yml`](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/environment.yml){target="_blank"}  and [intro-to-python.ipynb](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/intro-to-python.ipynb){target="_blank"} from GitHub and save them to your project directory.
+Let's start by creating a local repository (project) to store our work.
 
+1. **Open Positron** and click on File > New Folder from Template... > Empty Project > give it a name (e.g. intro-python) and select where on your computer you'd like to save it to > click Create
+
+::: {.callout-tip}
+We won't be covering git/GitHub today, though versioning your work is always best practice and encouraged!
+:::
+
+2. **Create two folders inside your project named `exercise1` and `exercise2`.** Click on the Explorer pane (it should already be open) > hover your mouse over your repository name until you see the New Folder... button > add your first folder, then repeat for the second
+
+### Exercise 1: Run existing Python code {#exercise1}
+
+Sometimes you'll receive Python code and an environment file (`environment.yml` or `requirements.txt`) from a collaborator (like the one in the folded chunk, below). In this exercise, you will reproduce an environment and run a Python script. 
 
 ::: {.callout-note collapse="true"}
-## environment.yml
+## `environment.yml`
 
 The `environment.yml` is a text file that specifies a conda environment's name, channels to download from, and package dependencies. It is similar to a `requirements.txt` file that is used for `venv`.
-```{yaml}
+
+```{yaml filename="environment.yml"}
 name: cmip6-env
 channels:
   - conda-forge
@@ -40,7 +51,8 @@ dependencies:
 ```
 :::
 
-To download the Python environment and Jupyter Notebook in the Terminal, you can run the following:
+1. **Download the [`environment.yml`](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/environment.yml){target="_blank"} and [intro-to-python.ipynb](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/intro-to-python.ipynb){target="_blank"}** from GitHub and save them to your project directory. You can do this in the Terminal by running:
+
 ```{bash filename="Terminal"}
 #| eval: false
 #| echo: true
@@ -52,16 +64,17 @@ curl -O https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercis
 curl -O https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercises/intro-to-python.ipynb
 ```
 
+- You can drag and drop these files into your `exercise1/` folder
 
-- Create the `cmip6-env` conda environment from a file, which in this case is called `environment.yml`:
+2. **Create the `cmip6-env` conda environment** from our downloaded `environment.yml` file:
 
 ```{bash filename="Terminal"}
 #| eval: false
 #| echo: true
-conda env create -f environment.yml
+conda env create -f exercise1/environment.yml
 ```
 
-- Activate the environment:
+3. **Activate the environment:**
 
 ```{bash filename="Terminal"}
 #| eval: false
@@ -69,7 +82,7 @@ conda env create -f environment.yml
 conda activate cmip6-env
 ```
 
-- Register `cmip6-env` as a Jupyter kernel so it's available as a notebook interpreter:
+4. **Register `cmip6-env` as a Jupyter kernel** so it's available as a notebook interpreter:
 
 ```{bash filename="Terminal"}
 #| eval: false
@@ -77,14 +90,13 @@ conda activate cmip6-env
 python -m ipykernel install --user --name cmip6-env --display-name "Python (cmip6-env)"
 ```
 
+5. **Open `intro-to-python.ipynb` (in Positron) and select `cmip6-env` as your interpreter.** Click the interpreter selector in the top right of the Jupyter Notebook and choose `Python (cmip6-env)`. 
 
-- In Positron, open `intro-to-python.ipynb`. Select `cmip6-env` as your interpreter by clicking the interpreter selector in the top right of the Jupyter Notebook and choosing `Python (cmip6-env)`. 
-
-- Run through all the cells in the Jupyter Notebook.
+6. **Run through all the cells** in the Jupyter Notebook.
 
 ### Exercise 2: Translating R to Python
 
-Let's say you already have some R code for reproducing the [US Drought Monitor](https://droughtmonitor.unl.edu/){target="_blank"}'s ["Drought area in California" visualization](https://en.wikipedia.org/wiki/Droughts_in_California#/media/File:Drought_area_in_California.svg){target="_blank"} (you can download the necessary data from [Google Drive](https://drive.google.com/file/d/1SQOUoCD9RZIpzm2rKyjKenRlMFiCKhny/view?usp=sharing){target="_blank"}), and you'd like to translate it to Python:
+Let's say you already have some R code for reproducing the [US Drought Monitor](https://droughtmonitor.unl.edu/){target="_blank"}'s ["Drought area in California" visualization](https://en.wikipedia.org/wiki/Droughts_in_California#/media/File:Drought_area_in_California.svg){target="_blank"}, and you'd like to translate it to Python:
 
 ::: {.callout-note collapse="true"}
 ## Expand for R code
@@ -201,23 +213,129 @@ drought_clean |>
     plot.margin = margin(t = 10, r = 40, b = 10, l = 40)
   )
 ```
+
+::: {.center-text}
+![](../exercises/outputs/drought-r.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."}
+:::
 :::
 
-::: {.callout-important}
-## which approach should we recommend? export environment or create environment.yml first?
+- Download the necessary data from [Google Drive](https://drive.google.com/file/d/1SQOUoCD9RZIpzm2rKyjKenRlMFiCKhny/view?usp=sharing){target="_blank"} and save it to `exercise2/data/drought.csv`
+
+1. **Let's try to use [claude.ai](https://claude.ai/){target="_blank"} (or your preferred GenAI chatbot) to translate our R code into Python code**. Try sharing the R code, above, along with the prompt,
+
+>Translate this R code into Python code using pandas for the data wrangling and plotnine for the data viz 
+
+::: {.callout-tip}
+## Tell your AI tool which Python packages you want to use
+Check out [this slide](https://docs.google.com/presentation/d/1Q7PZRSdZFcdeg-N73ibxHnAbVq-8uFhD5KHtr8SkNXI/edit?slide=id.g3e21014f16a_0_0#slide=id.g3e21014f16a_0_0){target="_blank"} for Python equivalents to your favorite R packages.
 :::
 
-1. **Start by creating a new `conda` environment from scratch:**
+2. **Add a new Python script named, `drought.py` to your `exercise2/` folder** and copy the AI-generated code into it. It should look something like this (though, as with all AI-generated output, yours will probably look slightly different!):
 
-- In your Positron Terminal, create an environment named `drought-env`
+::: {.callout-note collapse="true"}
+## Expand for Python code
+```{python}
+#| eval: false
+#| echo: true
+#| message: false
+#| warning: false
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##                                    setup                                 ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#..........................load packages.........................
+import pandas as pd
+from plotnine import *
+
+#..........................import data...........................
+drought = pd.read_csv("data/drought.csv")
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##                            wrangle drought data                          ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+drought_clean = (
+    drought
+    .melt(id_vars=[c for c in drought.columns if c not in 
+                   ["None", "D0", "D1", "D2", "D3", "D4"]],
+          var_name="drought_lvl", value_name="area_pct")
+    .rename(columns=str.lower)
+    .rename(columns={"state_abbreviation": "state_abb", "valid_start": "date"})
+    [["date", "state_abb", "drought_lvl", "area_pct"]]
+    .assign(
+        date=lambda df: pd.to_datetime(df["date"]),
+        drought_lvl_long=lambda df: pd.Categorical(
+            df["drought_lvl"].map({
+                "D4": "D4 (Exceptional)",
+                "D3": "D3 (Extreme)",
+                "D2": "D2 (Severe)",
+                "D1": "D1 (Moderate)",
+                "D0": "D0 (Abnormally Dry)",
+                "None": "No Drought"
+            }),
+            categories=["D4 (Exceptional)", "D3 (Extreme)", "D2 (Severe)",
+                        "D1 (Moderate)", "D0 (Abnormally Dry)", "No Drought"],
+            ordered=True
+        )
+    )
+)
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##       create stacked area plot of CA drought conditions through time     ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+plot_data = drought_clean[
+    (drought_clean["drought_lvl"] != "None") &
+    (drought_clean["state_abb"] == "CA")
+]
+
+(
+    ggplot(plot_data, aes(x="date", y="area_pct", fill="drought_lvl_long"))
+    + geom_area(position=position_stack(reverse=True))
+    + scale_fill_manual(values=["#853904", "#FF0000", "#FFC100", "#FFD965", "#FFFF00"])
+    + scale_x_datetime(
+        breaks=date_breaks("2 years"),
+        limits=(pd.Timestamp("2000-01-01"), pd.Timestamp("2026-12-31")),
+        labels=date_format("%Y"),
+        expand=(0, 0)
+    )
+    + scale_y_continuous(
+        breaks=range(0, 101, 10),
+        expand=(0, 0),
+        labels=lambda lst: [f"{v}%" for v in lst]
+    )
+    + labs(title="Drought area in California")
+    + theme_minimal()
+    + theme(
+        axis_line=element_line(color="#5A9CD6"),
+        axis_ticks=element_line(color="#5A9CD6"),
+        axis_ticks_length=0.2,
+        plot_title=element_text(ha="center", color="#686868", size=20,
+                                margin={"t": 10, "b": 15}),
+        axis_title=element_blank(),
+        legend_title=element_blank(),
+        axis_text=element_text(color="#686868", size=10),
+        legend_text=element_text(color="#686868", size=10),
+        legend_position="bottom",
+        legend_direction="horizontal",
+        legend_key_width=0.4,
+        legend_key_height=0.25,
+        plot_background=element_rect(color="#686868"),
+        plot_margin=0.1
+    )
+)
+```
+:::
+
+3. **Create a new `conda` environment called `drought-env` with Python 3.11.** While Python 3.13 is the latest version, many packages commonly used for environmental data science work haven't been updated to support it yet, so we recommend using 3.11 to avoid compatibility issues:
 
 ```{bash filename="Terminal"}
 #| eval: false
 #| echo: true
-conda create -n drought-env python=X
+conda create -n drought-env python=3.11
 ```
 
-- Activate your `drought-env` environment:
+4. **Activate your `drought-env` environment:**
 
 ```{bash filename="Terminal"}
 #| eval: false
@@ -225,7 +343,7 @@ conda create -n drought-env python=X
 conda activate drought-env
 ```
 
-- Install the necessary packages to your `drought-env` from the `conda-forge` channel (reminder: [conda-forge](https://conda-forge.org/docs/user/introduction/){target="_blank"} is a large repository of community-maintained Python packages):
+5. **Install the necessary packages to your `drought-env` from the `conda-forge` channel** (reminder: [conda-forge](https://conda-forge.org/docs/user/introduction/){target="_blank"} is a large repository of community-maintained Python packages):
 
 ```{bash filename="Terminal"}
 #| eval: false
@@ -233,14 +351,25 @@ conda activate drought-env
 conda install -c conda-forge pandas plotnine
 ```
 
-- Optionally, export your envrionment so that others who may use your code can reproduce your environment:
+6. **Optionally, export your environment to an `environment.yml` file** so others can reproduce it. Use the `--from-history` flag to export only the packages you explicitly installed, rather than all of their dependencies. This makes the file more portable across operating systems; instead of locking in your machine's specific dependencies, it lets conda resolve the right ones for each user's OS.
 
 ```{bash filename="Terminal"}
 #| eval: false
 #| echo: true
-# exports all currently installed packages and versions
-conda env export > environment.yml 
-
-# alternatively: only include packages that you explicitly installed, not their dependencies (more portable)
 conda env export --from-history > environment.yml
 ```
+
+7. **Register `drought-env` as a Jupyter kernel** so that Positron can find and use it as an interpreter: 
+
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+python -m ipykernel install --user --name drought-env --display-name "Python (drought-env)"
+```
+
+8. **Restart Positron, then select your interpreter** by clicking the Interpreter Picker (top right corner of Positron) > click New Console Session... > choose the Python 3.11.14 (Conda: drought-env) interpreter.
+
+9. **Try running your `drought.py` script.** It's likely that you'll have to troubleshoot some errors.
+
+...to be continued
+

@@ -33,6 +33,10 @@ include-in-header:
 knitr::include_graphics(here::here("images", "python-logo.png"))
 ```
 
+::: {.center-text .body-text-l}
+***THIS DOCUMENT IS CURRENTLY UNDER CONSTRUCTION***
+:::
+
 {{< include /sections/0-setup.qmd >}}
 
 {{< include /sections/1-slides.qmd >}}

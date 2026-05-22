@@ -11,7 +11,76 @@ format:
 ## {{< fa code title="code" >}} Let's write & run some Python code {#code}
 
 ### Exercise 1: Running existing Python code
+Sometimes you'll receive Python code and an environment file (environment.yml or requirements.txt) from a collaborator. In this exercise, you will reproduce an environment and run a Python script. 
 
+- Download the [`environment.yml`](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/environment.yml){target="_blank"}  and [intro-to-python.ipynb](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/intro-to-python.ipynb){target="_blank"} from GitHub and save them to your project directory.
+
+
+::: {.callout-note collapse="true"}
+## environment.yml
+
+The `environment.yml` is a text file that specifies a conda environment's name, channels to download from, and package dependencies. It is similar to a `requirements.txt` file that is used for `venv`.
+```{yaml}
+name: cmip6-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - intake
+  - intake-esm
+  - s3fs
+  - xarray
+  - zarr
+  - matplotlib
+  - numpy
+  - pandas
+  - jupyter
+  - ipykernel
+```
+:::
+
+To download the Python environment and Jupyter Notebook in the Terminal, you can run the following:
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+
+# Download the environment.yml
+curl -O https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercises/environment.yml
+
+# Download the intro-to-python.ipynb notebook
+curl -O https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercises/intro-to-python.ipynb
+```
+
+
+- Create the `cmip6-env` conda environment from a file, which in this case is called `environment.yml`:
+
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+conda env create -f environment.yml
+```
+
+- Activate the environment:
+
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+conda activate cmip6-env
+```
+
+- Register `cmip6-env` as a Jupyter kernel so it's available as a notebook interpreter:
+
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+python -m ipykernel install --user --name cmip6-env --display-name "Python (cmip6-env)"
+```
+
+
+- In Positron, open `intro-to-python.ipynb`. Select `cmip6-env` as your interpreter by clicking the interpreter selector in the top right of the Jupyter Notebook and choosing `Python (cmip6-env)`. 
+
+- Run through all the cells in the Jupyter Notebook.
 
 ### Exercise 2: Translating R to Python
 
@@ -20,7 +89,7 @@ Let's say you already have some R code for reproducing the [US Drought Monitor](
 ::: {.callout-note collapse="true"}
 ## Expand for R code
 ```{r}
-#| eval: true
+#| eval: false
 #| echo: true
 #| message: false
 #| warning: false

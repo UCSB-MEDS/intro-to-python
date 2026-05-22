@@ -15,7 +15,7 @@ format:
 
 ### Exercise 2: Translating R to Python
 
-Let's say you already have this R code for reproducing the [US Drought Monitor](https://droughtmonitor.unl.edu/){target="_blank"}'s ["Drought area in California" visualization](https://en.wikipedia.org/wiki/Droughts_in_California#/media/File:Drought_area_in_California.svg){target="_blank"}:
+Let's say you already have this R code for reproducing the [US Drought Monitor](https://droughtmonitor.unl.edu/){target="_blank"}'s ["Drought area in California" visualization](https://en.wikipedia.org/wiki/Droughts_in_California#/media/File:Drought_area_in_California.svg){target="_blank"} (you can download the necessary data from [Google Drive](https://drive.google.com/file/d/1SQOUoCD9RZIpzm2rKyjKenRlMFiCKhny/view?usp=sharing){target="_blank"}):
 
 ::: {.callout-note collapse="true"}
 ## Expand for R code

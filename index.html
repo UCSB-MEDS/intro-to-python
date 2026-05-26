@@ -338,24 +338,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="exercise0">Exercise 0: Create a new local project</h3>
 <p>Let’s start by creating a local repository (project) to store our work.</p>
 <ol type="1">
-<li><strong>Open Positron</strong> and click on File &gt; New Folder from Template… &gt; Empty Project &gt; give it a name (e.g.&nbsp;intro-python) and select where on your computer you’d like to save it to &gt; click Create</li>
+<li><p><strong>Open Positron</strong> and click on File &gt; New Folder from Template… &gt; Empty Project &gt; give it a name (e.g.&nbsp;intro-python) and select where on your computer you’d like to save it to &gt; click Create</p></li>
+<li><p><strong>Create two folders inside your project named <code>exercise1</code> and <code>exercise2</code>.</strong> Click on the Explorer pane (it should already be open) &gt; hover your mouse over your repository name until you see the New Folder… button &gt; add your first folder, then repeat for the second</p></li>
+<li><p><strong>Download a <a href="https://github.com/UCSB-MEDS/intro-to-python/blob/main/.gitignore" target="_blank"><code>.gitignore</code></a> template file from GitHub.</strong> A <code>.gitignore</code> file is a plain text file used to tell Git which files or folders it should intentionally ignore and not track. <em>While we won’t be using Git / GitHub to version control our files today, it’s helpful to be aware that the <code>.gitignore</code> template for Python projects looks different than R projects.</em> Run the following in your Positron Terminal:</p></li>
 </ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/refs/heads/main/.gitignore</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>cURL
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We won’t be covering git/GitHub today, though versioning your work is always best practice and encouraged!</p>
+<p><a href="https://curl.se/" target="_blank">cURL</a> (i.e.&nbsp;Client URL) is an open-source command-line tool used by developers to transfer data to or from a server. It makes it easy to download a URL from a web server over HTTP. We’ll use this again in the next exercise!</p>
 </div>
 </div>
-<ol start="2" type="1">
-<li><strong>Create two folders inside your project named <code>exercise1</code> and <code>exercise2</code>.</strong> Click on the Explorer pane (it should already be open) &gt; hover your mouse over your repository name until you see the New Folder… button &gt; add your first folder, then repeat for the second</li>
-</ol>
 </section>
 <section id="exercise1" class="level3">
 <h3 class="anchored" data-anchor-id="exercise1">Exercise 1: Run existing Python code</h3>
@@ -378,22 +385,22 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>environment.yml</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> cmip6-env</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.11</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> intake</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> intake-esm</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> s3fs</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> xarray</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> zarr</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> matplotlib</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> numpy</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pandas</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> jupyter</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ipykernel</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> cmip6-env</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.11</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> intake</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> intake-esm</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> s3fs</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> xarray</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> zarr</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> matplotlib</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> numpy</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pandas</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> jupyter</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ipykernel</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -407,11 +414,11 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>Terminal</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the environment.yml</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercises/environment.yml</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the intro-to-python.ipynb notebook</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercises/intro-to-python.ipynb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the environment.yml</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercises/environment.yml</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the intro-to-python.ipynb notebook</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercises/intro-to-python.ipynb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ul>
@@ -425,7 +432,7 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>Terminal</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> exercise1/environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> exercise1/environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ol start="3" type="1">
@@ -436,7 +443,7 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>Terminal</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate cmip6-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate cmip6-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ol start="4" type="1">
@@ -447,7 +454,7 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>Terminal</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ipykernel install <span class="at">--user</span> <span class="at">--name</span> cmip6-env <span class="at">--display-name</span> <span class="st">"Python (cmip6-env)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ipykernel install <span class="at">--user</span> <span class="at">--name</span> cmip6-env <span class="at">--display-name</span> <span class="st">"Python (cmip6-env)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ol start="5" type="1">
@@ -471,113 +478,113 @@ Tip
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                                    setup                                 ----</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#..........................load packages.........................</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#..........................import data...........................</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>drought <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"drought.csv"</span>))</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                            wrangle drought data                          ----</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>drought_clean <span class="ot">&lt;-</span> drought <span class="sc">|&gt;</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pivot table to be in tidy form ----</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> None<span class="sc">:</span>D4, <span class="at">names_to =</span> <span class="st">"drought_lvl"</span>, <span class="at">values_to =</span> <span class="st">"area_pct"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># clean up col names ----</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rename state abbreviation column ----</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>   <span class="fu">rename</span>(<span class="at">state_abb =</span> state_abbreviation) <span class="sc">|&gt;</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select cols of interest &amp; update names for clarity (as needed) ----</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">date =</span> valid_start, state_abb, drought_lvl, area_pct) <span class="sc">|&gt;</span> </span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add drought level conditions names ---- </span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">drought_lvl_long =</span> <span class="fu">factor</span>(drought_lvl,</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"D4"</span>, <span class="st">"D3"</span>, <span class="st">"D2"</span>, <span class="st">"D1"</span>,<span class="st">"D0"</span>, <span class="st">"None"</span>),</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D4 (Exceptional)"</span>, <span class="st">"D3 (Extreme)"</span>,</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"D2 (Severe)"</span>, <span class="st">"D1 (Moderate)"</span>, </span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"D0 (Abnormaly Dry)"</span>, </span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"No Drought"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reorder cols ----</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(date, state_abb, drought_lvl, drought_lvl_long, area_pct)</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="do">##       create stacked area plot of CA drought conditions through time     ----</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>drought_clean <span class="sc">|&gt;</span> </span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove drought_lvl "None" &amp; filter for just CA ----</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(drought_lvl <span class="sc">!=</span> <span class="st">"None"</span>,</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>         state_abb <span class="sc">==</span> <span class="st">"CA"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># initialize ggplot ----</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> area_pct, <span class="at">fill =</span> drought_lvl_long)) <span class="sc">+</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reverse order of groups so level D4 is closest to x-axis ----</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  <span class="co"># update colors to match US Drought Monitor ----</span></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (colors identified using ColorPick Eyedropper extension on the original USDM data viz) </span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#853904"</span>, <span class="st">"#FF0000"</span>, <span class="st">"#FFC100"</span>, <span class="st">"#FFD965"</span>, <span class="st">"#FFFF00"</span>)) <span class="sc">+</span></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set x-axis breaks &amp; remove padding between data and x-axis ----</span></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_pretty</span>(<span class="at">n =</span> <span class="dv">13</span>),</span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>               <span class="at">limits =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2000-01-01"</span>, <span class="st">"2026-12-31"</span>)),</span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>               <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set y-axis breaks &amp; remove padding between data and y-axis &amp; convert values to percentages ----</span></span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>),</span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add title ----</span></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Drought area in California"</span>) <span class="sc">+</span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set theme minimal (includes major/minor grid lines, no axes) ----</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fine-tune adjustments to plot theme ----</span></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update axis lines &amp; ticks color ----</span></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"#5A9CD6"</span>),</span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"#5A9CD6"</span>),</span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>    <span class="co"># adjust length of axis ticks ----</span></span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks.length =</span> <span class="fu">unit</span>(.<span class="dv">2</span>, <span class="st">"cm"</span>),</span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>    <span class="co"># center plot title ----</span></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"#686868"</span>, <span class="at">size =</span> <span class="dv">20</span>,</span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>                              <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">15</span>, <span class="at">l =</span> <span class="dv">0</span>)),</span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove axis &amp; legend titles ----</span></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>    <span class="co"># axis text color &amp; size ----</span></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"#686868"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"#686868"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>    <span class="co"># move legend below plot ----</span></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.direction =</span> <span class="st">"horizontal"</span>,</span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>),</span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">"cm"</span>),</span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update plot background color &amp; plot margins ----</span></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"#686868"</span>),</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">40</span>, <span class="at">b =</span> <span class="dv">10</span>, <span class="at">l =</span> <span class="dv">40</span>)</span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                                    setup                                 ----</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#..........................load packages.........................</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#..........................import data...........................</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>drought <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"drought.csv"</span>))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                            wrangle drought data                          ----</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>drought_clean <span class="ot">&lt;-</span> drought <span class="sc">|&gt;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pivot table to be in tidy form ----</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> None<span class="sc">:</span>D4, <span class="at">names_to =</span> <span class="st">"drought_lvl"</span>, <span class="at">values_to =</span> <span class="st">"area_pct"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># clean up col names ----</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rename state abbreviation column ----</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>   <span class="fu">rename</span>(<span class="at">state_abb =</span> state_abbreviation) <span class="sc">|&gt;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select cols of interest &amp; update names for clarity (as needed) ----</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">date =</span> valid_start, state_abb, drought_lvl, area_pct) <span class="sc">|&gt;</span> </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add drought level conditions names ---- </span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">drought_lvl_long =</span> <span class="fu">factor</span>(drought_lvl,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"D4"</span>, <span class="st">"D3"</span>, <span class="st">"D2"</span>, <span class="st">"D1"</span>,<span class="st">"D0"</span>, <span class="st">"None"</span>),</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D4 (Exceptional)"</span>, <span class="st">"D3 (Extreme)"</span>,</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"D2 (Severe)"</span>, <span class="st">"D1 (Moderate)"</span>, </span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"D0 (Abnormaly Dry)"</span>, </span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"No Drought"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reorder cols ----</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(date, state_abb, drought_lvl, drought_lvl_long, area_pct)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="do">##       create stacked area plot of CA drought conditions through time     ----</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="do">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>drought_clean <span class="sc">|&gt;</span> </span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove drought_lvl "None" &amp; filter for just CA ----</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(drought_lvl <span class="sc">!=</span> <span class="st">"None"</span>,</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>         state_abb <span class="sc">==</span> <span class="st">"CA"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># initialize ggplot ----</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> area_pct, <span class="at">fill =</span> drought_lvl_long)) <span class="sc">+</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reverse order of groups so level D4 is closest to x-axis ----</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>  <span class="co"># update colors to match US Drought Monitor ----</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (colors identified using ColorPick Eyedropper extension on the original USDM data viz) </span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#853904"</span>, <span class="st">"#FF0000"</span>, <span class="st">"#FFC100"</span>, <span class="st">"#FFD965"</span>, <span class="st">"#FFFF00"</span>)) <span class="sc">+</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set x-axis breaks &amp; remove padding between data and x-axis ----</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_pretty</span>(<span class="at">n =</span> <span class="dv">13</span>),</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>               <span class="at">limits =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2000-01-01"</span>, <span class="st">"2026-12-31"</span>)),</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>               <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set y-axis breaks &amp; remove padding between data and y-axis &amp; convert values to percentages ----</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>),</span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add title ----</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Drought area in California"</span>) <span class="sc">+</span></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set theme minimal (includes major/minor grid lines, no axes) ----</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fine-tune adjustments to plot theme ----</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update axis lines &amp; ticks color ----</span></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"#5A9CD6"</span>),</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"#5A9CD6"</span>),</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>    <span class="co"># adjust length of axis ticks ----</span></span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks.length =</span> <span class="fu">unit</span>(.<span class="dv">2</span>, <span class="st">"cm"</span>),</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>    <span class="co"># center plot title ----</span></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"#686868"</span>, <span class="at">size =</span> <span class="dv">20</span>,</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>                              <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">15</span>, <span class="at">l =</span> <span class="dv">0</span>)),</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove axis &amp; legend titles ----</span></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>    <span class="co"># axis text color &amp; size ----</span></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"#686868"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"#686868"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>    <span class="co"># move legend below plot ----</span></span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>),</span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">"cm"</span>),</span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update plot background color &amp; plot margins ----</span></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"#686868"</span>),</span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">40</span>, <span class="at">b =</span> <span class="dv">10</span>, <span class="at">l =</span> <span class="dv">40</span>)</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="center-text">
 <p><img src="../exercises/outputs/drought-r.png" class="img-fluid" style="width:100.0%" alt="Stacked area chart of drought area in CA by severity from 2000-2026."></p>
@@ -623,91 +630,91 @@ Tip
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">##                                    setup                                 ----</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#..........................load packages.........................</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#..........................import data...........................</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>drought <span class="op">=</span> pd.read_csv(<span class="st">"data/drought.csv"</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">##                            wrangle drought data                          ----</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>drought_clean <span class="op">=</span> (</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    drought</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    .melt(id_vars<span class="op">=</span>[c <span class="cf">for</span> c <span class="kw">in</span> drought.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> </span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>                   [<span class="st">"None"</span>, <span class="st">"D0"</span>, <span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>, <span class="st">"D4"</span>]],</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>          var_name<span class="op">=</span><span class="st">"drought_lvl"</span>, value_name<span class="op">=</span><span class="st">"area_pct"</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span><span class="bu">str</span>.lower)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="st">"state_abbreviation"</span>: <span class="st">"state_abb"</span>, <span class="st">"valid_start"</span>: <span class="st">"date"</span>})</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    [[<span class="st">"date"</span>, <span class="st">"state_abb"</span>, <span class="st">"drought_lvl"</span>, <span class="st">"area_pct"</span>]]</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        date<span class="op">=</span><span class="kw">lambda</span> df: pd.to_datetime(df[<span class="st">"date"</span>]),</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        drought_lvl_long<span class="op">=</span><span class="kw">lambda</span> df: pd.Categorical(</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>            df[<span class="st">"drought_lvl"</span>].<span class="bu">map</span>({</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D4"</span>: <span class="st">"D4 (Exceptional)"</span>,</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D3"</span>: <span class="st">"D3 (Extreme)"</span>,</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D2"</span>: <span class="st">"D2 (Severe)"</span>,</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D1"</span>: <span class="st">"D1 (Moderate)"</span>,</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D0"</span>: <span class="st">"D0 (Abnormally Dry)"</span>,</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>                <span class="st">"None"</span>: <span class="st">"No Drought"</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>            }),</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>            categories<span class="op">=</span>[<span class="st">"D4 (Exceptional)"</span>, <span class="st">"D3 (Extreme)"</span>, <span class="st">"D2 (Severe)"</span>,</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"D1 (Moderate)"</span>, <span class="st">"D0 (Abnormally Dry)"</span>, <span class="st">"No Drought"</span>],</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>            ordered<span class="op">=</span><span class="va">True</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co">##       create stacked area plot of CA drought conditions through time     ----</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>plot_data <span class="op">=</span> drought_clean[</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    (drought_clean[<span class="st">"drought_lvl"</span>] <span class="op">!=</span> <span class="st">"None"</span>) <span class="op">&amp;</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    (drought_clean[<span class="st">"state_abb"</span>] <span class="op">==</span> <span class="st">"CA"</span>)</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>    ggplot(plot_data, aes(x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"area_pct"</span>, fill<span class="op">=</span><span class="st">"drought_lvl_long"</span>))</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_area(position<span class="op">=</span>position_stack(reverse<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>[<span class="st">"#853904"</span>, <span class="st">"#FF0000"</span>, <span class="st">"#FFC100"</span>, <span class="st">"#FFD965"</span>, <span class="st">"#FFFF00"</span>])</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_x_datetime(</span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>        breaks<span class="op">=</span>date_breaks(<span class="st">"2 years"</span>),</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>        limits<span class="op">=</span>(pd.Timestamp(<span class="st">"2000-01-01"</span>), pd.Timestamp(<span class="st">"2026-12-31"</span>)),</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span>date_format(<span class="st">"%Y"</span>),</span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>        expand<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_continuous(</span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>        breaks<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">101</span>, <span class="dv">10</span>),</span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>        expand<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span><span class="kw">lambda</span> lst: [<span class="ss">f"</span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">%"</span> <span class="cf">for</span> v <span class="kw">in</span> lst]</span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Drought area in California"</span>)</span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(</span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>        axis_line<span class="op">=</span>element_line(color<span class="op">=</span><span class="st">"#5A9CD6"</span>),</span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>        axis_ticks<span class="op">=</span>element_line(color<span class="op">=</span><span class="st">"#5A9CD6"</span>),</span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>        axis_ticks_length<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>        plot_title<span class="op">=</span>element_text(ha<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>                                margin<span class="op">=</span>{<span class="st">"t"</span>: <span class="dv">10</span>, <span class="st">"b"</span>: <span class="dv">15</span>}),</span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>        axis_title<span class="op">=</span>element_blank(),</span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>        legend_title<span class="op">=</span>element_blank(),</span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>        axis_text<span class="op">=</span>element_text(color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">10</span>),</span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>        legend_text<span class="op">=</span>element_text(color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">10</span>),</span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>        legend_position<span class="op">=</span><span class="st">"bottom"</span>,</span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>        legend_direction<span class="op">=</span><span class="st">"horizontal"</span>,</span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>        legend_key_width<span class="op">=</span><span class="fl">0.4</span>,</span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>        legend_key_height<span class="op">=</span><span class="fl">0.25</span>,</span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>        plot_background<span class="op">=</span>element_rect(color<span class="op">=</span><span class="st">"#686868"</span>),</span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>        plot_margin<span class="op">=</span><span class="fl">0.1</span></span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">##                                    setup                                 ----</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#..........................load packages.........................</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#..........................import data...........................</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>drought <span class="op">=</span> pd.read_csv(<span class="st">"data/drought.csv"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">##                            wrangle drought data                          ----</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>drought_clean <span class="op">=</span> (</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    drought</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    .melt(id_vars<span class="op">=</span>[c <span class="cf">for</span> c <span class="kw">in</span> drought.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>                   [<span class="st">"None"</span>, <span class="st">"D0"</span>, <span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>, <span class="st">"D4"</span>]],</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>          var_name<span class="op">=</span><span class="st">"drought_lvl"</span>, value_name<span class="op">=</span><span class="st">"area_pct"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span><span class="bu">str</span>.lower)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="st">"state_abbreviation"</span>: <span class="st">"state_abb"</span>, <span class="st">"valid_start"</span>: <span class="st">"date"</span>})</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    [[<span class="st">"date"</span>, <span class="st">"state_abb"</span>, <span class="st">"drought_lvl"</span>, <span class="st">"area_pct"</span>]]</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        date<span class="op">=</span><span class="kw">lambda</span> df: pd.to_datetime(df[<span class="st">"date"</span>]),</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        drought_lvl_long<span class="op">=</span><span class="kw">lambda</span> df: pd.Categorical(</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>            df[<span class="st">"drought_lvl"</span>].<span class="bu">map</span>({</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D4"</span>: <span class="st">"D4 (Exceptional)"</span>,</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D3"</span>: <span class="st">"D3 (Extreme)"</span>,</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D2"</span>: <span class="st">"D2 (Severe)"</span>,</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D1"</span>: <span class="st">"D1 (Moderate)"</span>,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>                <span class="st">"D0"</span>: <span class="st">"D0 (Abnormally Dry)"</span>,</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>                <span class="st">"None"</span>: <span class="st">"No Drought"</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>            }),</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>            categories<span class="op">=</span>[<span class="st">"D4 (Exceptional)"</span>, <span class="st">"D3 (Extreme)"</span>, <span class="st">"D2 (Severe)"</span>,</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"D1 (Moderate)"</span>, <span class="st">"D0 (Abnormally Dry)"</span>, <span class="st">"No Drought"</span>],</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>            ordered<span class="op">=</span><span class="va">True</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co">##       create stacked area plot of CA drought conditions through time     ----</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="co">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>plot_data <span class="op">=</span> drought_clean[</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    (drought_clean[<span class="st">"drought_lvl"</span>] <span class="op">!=</span> <span class="st">"None"</span>) <span class="op">&amp;</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    (drought_clean[<span class="st">"state_abb"</span>] <span class="op">==</span> <span class="st">"CA"</span>)</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    ggplot(plot_data, aes(x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"area_pct"</span>, fill<span class="op">=</span><span class="st">"drought_lvl_long"</span>))</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_area(position<span class="op">=</span>position_stack(reverse<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>[<span class="st">"#853904"</span>, <span class="st">"#FF0000"</span>, <span class="st">"#FFC100"</span>, <span class="st">"#FFD965"</span>, <span class="st">"#FFFF00"</span>])</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_x_datetime(</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>        breaks<span class="op">=</span>date_breaks(<span class="st">"2 years"</span>),</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>        limits<span class="op">=</span>(pd.Timestamp(<span class="st">"2000-01-01"</span>), pd.Timestamp(<span class="st">"2026-12-31"</span>)),</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span>date_format(<span class="st">"%Y"</span>),</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>        expand<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_continuous(</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>        breaks<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">101</span>, <span class="dv">10</span>),</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>        expand<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span><span class="kw">lambda</span> lst: [<span class="ss">f"</span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">%"</span> <span class="cf">for</span> v <span class="kw">in</span> lst]</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Drought area in California"</span>)</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>        axis_line<span class="op">=</span>element_line(color<span class="op">=</span><span class="st">"#5A9CD6"</span>),</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>        axis_ticks<span class="op">=</span>element_line(color<span class="op">=</span><span class="st">"#5A9CD6"</span>),</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>        axis_ticks_length<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>        plot_title<span class="op">=</span>element_text(ha<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>                                margin<span class="op">=</span>{<span class="st">"t"</span>: <span class="dv">10</span>, <span class="st">"b"</span>: <span class="dv">15</span>}),</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>        axis_title<span class="op">=</span>element_blank(),</span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>        legend_title<span class="op">=</span>element_blank(),</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>        axis_text<span class="op">=</span>element_text(color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">10</span>),</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>        legend_text<span class="op">=</span>element_text(color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">10</span>),</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>        legend_position<span class="op">=</span><span class="st">"bottom"</span>,</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>        legend_direction<span class="op">=</span><span class="st">"horizontal"</span>,</span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>        legend_key_width<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>        legend_key_height<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>        plot_background<span class="op">=</span>element_rect(color<span class="op">=</span><span class="st">"#686868"</span>),</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>        plot_margin<span class="op">=</span><span class="fl">0.1</span></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -720,7 +727,7 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>Terminal</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> drought-env python=3.11</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> drought-env python=3.11</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ol start="4" type="1">
@@ -731,7 +738,7 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>Terminal</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate drought-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate drought-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ol start="5" type="1">
@@ -742,7 +749,7 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>Terminal</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge pandas plotnine</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge pandas plotnine</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ol start="6" type="1">
@@ -753,7 +760,7 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>Terminal</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ol start="7" type="1">
@@ -764,7 +771,7 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>Terminal</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ipykernel install <span class="at">--user</span> <span class="at">--name</span> drought-env <span class="at">--display-name</span> <span class="st">"Python (drought-env)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ipykernel install <span class="at">--user</span> <span class="at">--name</span> drought-env <span class="at">--display-name</span> <span class="st">"Python (drought-env)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ol start="8" type="1">

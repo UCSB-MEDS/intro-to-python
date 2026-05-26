@@ -16,13 +16,20 @@ Let's start by creating a local repository (project) to store our work.
 
 1. **Open Positron** and click on File > New Folder from Template... > Empty Project > give it a name (e.g. intro-python) and select where on your computer you'd like to save it to > click Create
 
-::: {.callout-tip}
-We won't be covering git/GitHub today, though versioning your work is always best practice and encouraged!
-:::
-
 2. **Create two folders inside your project named `exercise1` and `exercise2`.** Click on the Explorer pane (it should already be open) > hover your mouse over your repository name until you see the New Folder... button > add your first folder, then repeat for the second
 
-3. **Add a `.gitignore`**
+3. **Download a [`.gitignore`](https://github.com/UCSB-MEDS/intro-to-python/blob/main/.gitignore){target="_blank"} template file from GitHub.** A `.gitignore` file is a plain text file used to tell Git which files or folders it should intentionally ignore and not track. *While we won't be using Git / GitHub to version control our files today, it's helpful to be aware that the `.gitignore` template for Python projects looks different than R projects.* Run the following in your Positron Terminal: 
+
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+curl -O https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/refs/heads/main/.gitignore
+```
+
+::: {.callout-tip}
+## cURL
+[cURL](https://curl.se/){target="_blank"} (i.e. Client URL) is an open-source command-line tool used by developers to transfer data to or from a server. It makes it easy to download a URL from a web server over HTTP. We'll use this again in the next exercise!
+:::
 
 ### Exercise 1: Run existing Python code {#exercise1}
 

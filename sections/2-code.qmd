@@ -224,25 +224,31 @@ drought_clean |>
 ```
 
 ::: {.center-text}
-![](../exercises/outputs/drought-r.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."}
+![](../images/drought-r.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."}
 :::
 :::
 
-- Download the necessary data from [Google Drive](https://drive.google.com/file/d/1SQOUoCD9RZIpzm2rKyjKenRlMFiCKhny/view?usp=sharing){target="_blank"} and save it to `exercise2/data/drought.csv`
+1. **Download the necessary data** and save it to `exercise2/data/` (you'll need to create a `data/` folder inside `exericse2/` then drag and drop `drought.csv` into it):
 
-1. **Let's try to use [claude.ai](https://claude.ai/){target="_blank"} (or your preferred GenAI chatbot) to translate our R code into Python code**. Try sharing the R code, above, along with the prompt,
+```{bash filename="Terminal"}
+#| eval: false
+#| echo: true
+curl -O https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/refs/heads/main/data/drought.csv
+```
 
->Translate this R code into Python code using pandas for the data wrangling and plotnine for the data viz 
+2. **Let's try to use [claude.ai](https://claude.ai/){target="_blank"} (or your preferred GenAI chatbot) to translate our R code into Python code**. Try sharing the R code, above, along with the prompt,
+
+>Translate this R code into Python code using pandas and pyjanitor for the data wrangling and plotnine for the data viz 
 
 ::: {.callout-tip}
 ## Tell your AI tool which Python packages you want to use
 Check out [this slide](https://docs.google.com/presentation/d/1Q7PZRSdZFcdeg-N73ibxHnAbVq-8uFhD5KHtr8SkNXI/edit?slide=id.g3e21014f16a_0_0#slide=id.g3e21014f16a_0_0){target="_blank"} for Python equivalents to your favorite R packages.
 :::
 
-2. **Add a new Python script named, `drought.py` to your `exercise2/` folder** and copy the AI-generated code into it. It should look something like this (though, as with all AI-generated output, yours will probably look slightly different!):
+3. **Add a new Python script named, `drought.py` to your `exercise2/` folder and copy the AI-generated code into it.** Yours may look a bit different than ours (and everyone else's around you).
 
 ::: {.callout-note collapse="true"}
-## Expand for Python code
+## Expand for AI-generated Python code
 ```{python}
 #| eval: false
 #| echo: true
@@ -254,6 +260,7 @@ Check out [this slide](https://docs.google.com/presentation/d/1Q7PZRSdZFcdeg-N73
 
 #..........................load packages.........................
 import pandas as pd
+import janitor
 from plotnine import *
 
 #..........................import data...........................
@@ -265,78 +272,89 @@ drought = pd.read_csv("data/drought.csv")
 
 drought_clean = (
     drought
-    .melt(id_vars=[c for c in drought.columns if c not in 
-                   ["None", "D0", "D1", "D2", "D3", "D4"]],
+    # pivot table to be in tidy form ----
+    .melt(id_vars=[c for c in drought.columns if c not in ["None","D0","D1","D2","D3","D4"]],
           var_name="drought_lvl", value_name="area_pct")
-    .rename(columns=str.lower)
-    .rename(columns={"state_abbreviation": "state_abb", "valid_start": "date"})
-    [["date", "state_abb", "drought_lvl", "area_pct"]]
+    # clean up col names ----
+    .clean_names()
+    # rename state abbreviation column ----
+    .rename(columns={"state_abbreviation": "state_abb"})
+    # select cols of interest ----
+    .rename(columns={"valid_start": "date"})
+    .loc[:, ["date", "state_abb", "drought_lvl", "area_pct"]]
+    # add drought level condition names ----
     .assign(
         date=lambda df: pd.to_datetime(df["date"]),
         drought_lvl_long=lambda df: pd.Categorical(
             df["drought_lvl"].map({
-                "D4": "D4 (Exceptional)",
-                "D3": "D3 (Extreme)",
-                "D2": "D2 (Severe)",
-                "D1": "D1 (Moderate)",
-                "D0": "D0 (Abnormally Dry)",
-                "None": "No Drought"
+                "D4": "D4 (Exceptional)", "D3": "D3 (Extreme)",
+                "D2": "D2 (Severe)",      "D1": "D1 (Moderate)",
+                "D0": "D0 (Abnormaly Dry)", "None": "No Drought"
             }),
             categories=["D4 (Exceptional)", "D3 (Extreme)", "D2 (Severe)",
-                        "D1 (Moderate)", "D0 (Abnormally Dry)", "No Drought"],
+                        "D1 (Moderate)", "D0 (Abnormaly Dry)", "No Drought"],
             ordered=True
         )
     )
+    # reorder cols ----
+    [["date", "state_abb", "drought_lvl", "drought_lvl_long", "area_pct"]]
 )
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##       create stacked area plot of CA drought conditions through time     ----
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-plot_data = drought_clean[
-    (drought_clean["drought_lvl"] != "None") &
-    (drought_clean["state_abb"] == "CA")
-]
-
 (
-    ggplot(plot_data, aes(x="date", y="area_pct", fill="drought_lvl_long"))
-    + geom_area(position=position_stack(reverse=True))
-    + scale_fill_manual(values=["#853904", "#FF0000", "#FFC100", "#FFD965", "#FFFF00"])
-    + scale_x_datetime(
-        breaks=date_breaks("2 years"),
-        limits=(pd.Timestamp("2000-01-01"), pd.Timestamp("2026-12-31")),
-        labels=date_format("%Y"),
-        expand=(0, 0)
-    )
-    + scale_y_continuous(
-        breaks=range(0, 101, 10),
-        expand=(0, 0),
-        labels=lambda lst: [f"{v}%" for v in lst]
-    )
-    + labs(title="Drought area in California")
-    + theme_minimal()
-    + theme(
-        axis_line=element_line(color="#5A9CD6"),
-        axis_ticks=element_line(color="#5A9CD6"),
-        axis_ticks_length=0.2,
-        plot_title=element_text(ha="center", color="#686868", size=20,
-                                margin={"t": 10, "b": 15}),
-        axis_title=element_blank(),
-        legend_title=element_blank(),
-        axis_text=element_text(color="#686868", size=10),
-        legend_text=element_text(color="#686868", size=10),
-        legend_position="bottom",
-        legend_direction="horizontal",
-        legend_key_width=0.4,
-        legend_key_height=0.25,
-        plot_background=element_rect(color="#686868"),
-        plot_margin=0.1
-    )
+    drought_clean
+    # remove drought_lvl "None" & filter for just CA ----
+    [lambda df: (df["drought_lvl"] != "None") & (df["state_abb"] == "CA")]
+    .pipe(lambda df: (
+        ggplot(df, aes(x="date", y="area_pct", fill="drought_lvl_long"))
+        # reverse order of groups so level D4 is closest to x-axis ----
+        + geom_area(position=position_stack(reverse=True))
+        # update colors to match US Drought Monitor ----
+        + scale_fill_manual(values=["#853904", "#FF0000", "#FFC100", "#FFD965", "#FFFF00"])
+        # set x-axis breaks & remove padding ----
+        + scale_x_datetime(
+            breaks=date_breaks("2 years"),
+            date_labels="%Y",
+            limits=(pd.Timestamp("2000-01-01"), pd.Timestamp("2026-12-31")),
+            expand=(0, 0)
+        )
+        # set y-axis breaks & remove padding & convert to percentages ----
+        + scale_y_continuous(
+            breaks=range(0, 101, 10),
+            expand=(0, 0),
+            labels=lambda lst: [f"{v}%" for v in lst]
+        )
+        # add title ----
+        + labs(title="Drought area in California")
+        # set theme minimal ----
+        + theme_minimal()
+        # fine-tune adjustments to plot theme ----
+        + theme(
+            axis_line=element_line(color="#5A9CD6"),
+            axis_ticks=element_line(color="#5A9CD6"),
+            axis_ticks_length=0.2,
+            plot_title=element_text(ha="center", color="#686868", size=20,
+                                    margin={"t": 10, "r": 0, "b": 15, "l": 0}),
+            axis_title=element_blank(),
+            legend_title=element_blank(),
+            axis_text=element_text(color="#686868", size=10),
+            legend_text=element_text(color="#686868", size=10),
+            legend_position="bottom",
+            legend_direction="horizontal",
+            legend_key_width=0.4,
+            legend_key_height=0.25,
+            plot_background=element_rect(color="#686868"),
+            plot_margin=0.1
+        )
+    ))
 )
 ```
-:::
+::: 
 
-3. **Create a new `conda` environment called `drought-env` with Python 3.11.** While Python 3.13 is the latest version, many packages commonly used for environmental data science work haven't been updated to support it yet, so we recommend using 3.11 to avoid compatibility issues:
+4. **Create a new `conda` environment called `drought-env` with Python 3.11.** While Python 3.13 is the latest version, many packages commonly used for environmental data science work haven't been updated to support it yet, so we recommend using 3.11 to avoid compatibility issues:
 
 ```{bash filename="Terminal"}
 #| eval: false
@@ -344,7 +362,7 @@ plot_data = drought_clean[
 conda create -n drought-env python=3.11
 ```
 
-4. **Activate your `drought-env` environment:**
+5. **Activate your `drought-env` environment:**
 
 ```{bash filename="Terminal"}
 #| eval: false
@@ -352,23 +370,23 @@ conda create -n drought-env python=3.11
 conda activate drought-env
 ```
 
-5. **Install the necessary packages to your `drought-env` from the `conda-forge` channel** (reminder: [conda-forge](https://conda-forge.org/docs/user/introduction/){target="_blank"} is a large repository of community-maintained Python packages):
+6. **Install the necessary packages to your `drought-env` from the `conda-forge` channel** (reminder: [conda-forge](https://conda-forge.org/docs/user/introduction/){target="_blank"} is a large repository of community-maintained Python packages):
 
 ```{bash filename="Terminal"}
 #| eval: false
 #| echo: true
-conda install -c conda-forge pandas plotnine
+conda install -c conda-forge pandas plotnine ipykernel
 ```
 
-6. **Optionally, export your environment to an `environment.yml` file** so others can reproduce it. Use the `--from-history` flag to export only the packages you explicitly installed, rather than all of their dependencies. This makes the file more portable across operating systems; instead of locking in your machine's specific dependencies, it lets conda resolve the right ones for each user's OS.
+7. **Optionally, export your environment to an `environment.yml` file** so others can reproduce it. Use the `--from-history` flag to export only the packages you explicitly installed, rather than all of their dependencies. This makes the file more portable across operating systems; instead of locking in your machine's specific dependencies, it lets conda resolve the right ones for each user's OS.
 
 ```{bash filename="Terminal"}
 #| eval: false
 #| echo: true
-conda env export --from-history > environment.yml
+conda env export --from-history > exercise2/environment.yml
 ```
 
-7. **Register `drought-env` as a Jupyter kernel** so that Positron can find and use it as an interpreter: 
+8. **Register `drought-env` as a Jupyter kernel** so that Positron can find and use it as an interpreter: 
 
 ```{bash filename="Terminal"}
 #| eval: false
@@ -376,9 +394,130 @@ conda env export --from-history > environment.yml
 python -m ipykernel install --user --name drought-env --display-name "Python (drought-env)"
 ```
 
-8. **Restart Positron, then select your interpreter** by clicking the Interpreter Picker (top right corner of Positron) > click New Console Session... > choose the Python 3.11.14 (Conda: drought-env) interpreter.
+9. **Restart Positron, then select your interpreter** by clicking the Interpreter Picker (top right corner of Positron) > click New Console Session... > choose the Python 3.11.14 (Conda: drought-env) interpreter.
 
-9. **Try running your `drought.py` script.** It's likely that you'll have to troubleshoot some errors.
+10. **Try running your `drought.py` script.** *Your code will likely **not** run without some manual updates. Things to try / look out for:*
 
-...to be continued
+- it's helpful to run your code line-by-line
+- make sure the file path for reading in your data is correct
+- don't assume all packages work the same as those in R (e.g. does `pyjanitor` convert column names to snake_case, as `{janitor}` does in R?)
+- check out your df in Positron's data viewer by running `%view drought_clean` in your console
+- try commenting out sections of code to get things running (even if not *perfect*)
+- ask AI to help interpret error messages
+
+::: {.callout-note collapse="true"}
+## Expand for manually-adjusted Python code
+```{python filetype="drought.py"}
+#| eval: false
+#| echo: true
+#| message: false
+#| warning: false
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##                                    setup                                 ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#..........................load packages.........................
+import pandas as pd
+import janitor
+from plotnine import *
+
+#..........................import data...........................
+drought = pd.read_csv("exercise2/data/drought.csv") # <1>
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##                            wrangle drought data                          ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+drought_clean = (
+    drought
+    # pivot table to be in tidy form ----
+    .melt(id_vars=[c for c in drought.columns if c not in ["None","D0","D1","D2","D3","D4"]],
+          var_name="drought_lvl", value_name="area_pct")
+    # clean up col names ----
+    .clean_names() # <2>
+    # rename state abbreviation column ----
+    .rename(columns={"stateabbreviation": "stateabb"})
+    # select cols of interest ----
+    .rename(columns={"validstart": "date"})
+    .loc[:, ["date", "stateabb", "drought_lvl", "area_pct"]]
+    # add drought level condition names ----
+    .assign(
+        date=lambda df: pd.to_datetime(df["date"]),
+        drought_lvl_long=lambda df: pd.Categorical(
+            df["drought_lvl"].map({
+                "D4": "D4 (Exceptional)", "D3": "D3 (Extreme)",
+                "D2": "D2 (Severe)",      "D1": "D1 (Moderate)",
+                "D0": "D0 (Abnormaly Dry)", "None": "No Drought"
+            }),
+            categories=["D4 (Exceptional)", "D3 (Extreme)", "D2 (Severe)",
+                        "D1 (Moderate)", "D0 (Abnormaly Dry)", "No Drought"],
+            ordered=True
+        )
+    )
+    # reorder cols ----
+    [["date", "stateabb", "drought_lvl", "drought_lvl_long", "area_pct"]]
+)
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##       create stacked area plot of CA drought conditions through time     ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(
+    drought_clean
+    # remove drought_lvl "None" & filter for just CA ----
+    [lambda df: (df["drought_lvl"] != "None") & (df["stateabb"] == "CA")] # FIX STATEABB
+    .pipe(lambda df: (
+        ggplot(df, aes(x="date", y="area_pct", fill="drought_lvl_long"))
+        # reverse order of groups so level D4 is closest to x-axis ----
+        + geom_area(position=position_stack(reverse=True))
+        # update colors to match US Drought Monitor ----
+        + scale_fill_manual(values=["#853904", "#FF0000", "#FFC100", "#FFD965", "#FFFF00"])
+        # set x-axis breaks & remove padding ---- # <3>
+        # + scale_x_datetime( # <3>
+        #     breaks=date_breaks("2 years"), # <3>
+        #     date_labels="%Y", # <3>
+        #     limits=(pd.Timestamp("2000-01-01"), pd.Timestamp("2026-12-31")), # <3>
+        #     expand=(0, 0) # <3>
+        # ) # <3>
+        # set y-axis breaks & remove padding & convert to percentages ----
+        + scale_y_continuous(
+            breaks=range(0, 101, 10),
+            expand=(0, 0),
+            labels=lambda lst: [f"{v}%" for v in lst]
+        )
+        # add title ----
+        + labs(title="Drought area in California")
+        # set theme minimal ----
+        + theme_minimal()
+        # fine-tune adjustments to plot theme ----
+        + theme(
+            axis_line=element_line(color="#5A9CD6"),
+            axis_ticks=element_line(color="#5A9CD6"),
+            axis_ticks_length=0.2,
+            plot_title=element_text(ha="center", color="#686868", size=20,
+                                    margin={"t": 10, "r": 0, "b": 15, "l": 0}),
+            axis_title=element_blank(),
+            legend_title=element_blank(),
+            axis_text=element_text(color="#686868", size=10),
+            legend_text=element_text(color="#686868", size=10),
+            legend_position="bottom",
+            legend_direction="horizontal",
+            legend_key_width=0.4,
+            legend_key_height=0.25,
+            plot_background=element_rect(color="#686868"),
+            plot_margin=0.1
+        )
+    ))
+)
+
+```
+1. Updated the filepath to point to the correct data source.
+2. Unlike `clean_names()` in R's `{janitor}` package, Python's `pyjanitor` equivalent, `.clean_names()`, converts column names to lowercase rather than snake_case. Run `%view drought_clean` to compare column names against those used in the cleaning & data viz code, and update any mismatches.
+3. Running the code line-by-line reveals a `NameError: name 'date_breaks' is not defined.` when we add in these lines of code. Asking claude.ai to explain the error helps us understand that `date_breaks` isn't exported by `from plotnine import *`, but rather lives in `mizani`, the underlying scales/formatting dependency. It can be installed via `conda install -c conda-forge mizani`. For now, we chose to comment out these lines of code to first get a working plot.
+
+::: {.center-text}
+![](../images/drought-python.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."}
+:::
+
+:::
 

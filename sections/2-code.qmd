@@ -376,9 +376,8 @@ python -m ipykernel install --user --name drought-env --display-name "Python (dr
 
 - it's helpful to run your code line-by-line
 - make sure the file path for reading in your data is correct
-- don't assume all packages work the same as those in R (e.g. does `pyjanitor` convert column names to snake_case, as `{janitor}` does in R?)
 - check out your df in Positron's data viewer by running `%view drought_clean` in your console
-- try commenting out sections of code to get things running (even if not *perfect*)
+- try commenting out sections of code to get things running (even if it's not *perfect*)
 - ask AI to help interpret error messages
 
 ::: {.callout-note collapse="true"}

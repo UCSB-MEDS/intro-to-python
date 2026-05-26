@@ -6,7 +6,6 @@ format:
     toc-location: left
     toc-depth: 3
     smooth-scroll: true
-    embed-resources: true
 ---
 
 ## {{< fa code title="code" >}} Let's write & run some Python code {#code}
@@ -221,7 +220,8 @@ ggplot(drought_clean, mapping = aes(x = start_date, y = area_pct, fill = drought
 ```
 
 ::: {.center-text}
-![](../images/drought-r.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."}
+![](https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/images/drought-r.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."}
+<!-- ![](../images/drought-r.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."} -->
 :::
 :::
 
@@ -470,7 +470,8 @@ drought_clean = (
 2. Running the code line-by-line reveals a `NameError: name 'date_breaks' is not defined.` when we add in these lines of code. Asking claude.ai to explain the error helps us understand that `date_breaks` isn't exported by `from plotnine import *`, but rather lives in `mizani`, the underlying scales/formatting dependency. It can be installed via `conda install -c conda-forge mizani`. For now, we chose to comment out these lines of code to first get a working plot.
 
 ::: {.center-text}
-![](../images/drought-python.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."}
+![](https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/images/drought-python.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."}
+<!-- ![](../images/drought-python.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."} -->
 :::
 
 :::

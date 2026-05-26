@@ -6,7 +6,7 @@
 library(tidyverse)
 
 #..........................import data...........................
-drought <- read_csv(here::here("exercises", "data", "drought.csv"))
+drought <- read_csv(here::here("data", "drought.csv"))
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##                            wrangle drought data                          ----
@@ -15,40 +15,35 @@ drought <- read_csv(here::here("exercises", "data", "drought.csv"))
 drought_clean <- drought |>
   
   # pivot table to be in tidy form ----
-  pivot_longer(cols = None:D4, names_to = "drought_lvl", values_to = "area_pct") |>
+  pivot_longer(cols = none:d4, names_to = "drought_lvl", values_to = "area_pct") |>
   
-  # clean up col names ----
-  janitor::clean_names() |>
-  
-  # Rename state abbreviation column ----
-   rename(state_abb = state_abbreviation) |>
-
   # select cols of interest & update names for clarity (as needed) ----
-  select(date = valid_start, state_abb, drought_lvl, area_pct) |> 
+  select(start_date, state_abb, drought_lvl, area_pct) |> 
+  
+  # coerce start_date to date ----
+  mutate(start_date = mdy(start_date)) |> 
 
   # add drought level conditions names ---- 
   mutate(drought_lvl_long = factor(drought_lvl,
-                                   levels = c("D4", "D3", "D2", "D1","D0", "None"),
+                                   levels = c("d4", "d3", "d2", "d1", "d0", "none"),
                                    labels = c("D4 (Exceptional)", "D3 (Extreme)",
                                        "D2 (Severe)", "D1 (Moderate)", 
                                        "D0 (Abnormaly Dry)", 
                                        "No Drought"))) |>
   
   # reorder cols ----
-  relocate(date, state_abb, drought_lvl, drought_lvl_long, area_pct)
+  relocate(start_date, state_abb, drought_lvl, drought_lvl_long, area_pct) |> 
+  
+  # remove drought_lvl "None" & filter for just CA ----
+  filter(drought_lvl != "none",
+         state_abb == "CA") |> 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##       create stacked area plot of CA drought conditions through time     ----
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-drought_clean |> 
-  
-  # remove drought_lvl "None" & filter for just CA ----
-  filter(drought_lvl != "None",
-         state_abb == "CA") |> 
-  
-  # initialize ggplot ----
-  ggplot(mapping = aes(x = date, y = area_pct, fill = drought_lvl_long)) +
+# initialize ggplot ----
+ggplot(drought_clean, mapping = aes(x = start_date, y = area_pct, fill = drought_lvl_long)) +
   
   # reverse order of groups so level D4 is closest to x-axis ----
   geom_area(position = position_stack(reverse = TRUE)) +

@@ -22,6 +22,8 @@ We won't be covering git/GitHub today, though versioning your work is always bes
 
 2. **Create two folders inside your project named `exercise1` and `exercise2`.** Click on the Explorer pane (it should already be open) > hover your mouse over your repository name until you see the New Folder... button > add your first folder, then repeat for the second
 
+3. **Add a `.gitignore`**
+
 ### Exercise 1: Run existing Python code {#exercise1}
 
 Sometimes you'll receive Python code and an environment file (`environment.yml` or `requirements.txt`) from a collaborator (like the one in the folded chunk, below). In this exercise, you will reproduce an environment and run a Python script. 

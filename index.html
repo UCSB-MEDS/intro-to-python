@@ -872,7 +872,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="annotated-cell-27-51"><a href="#annotated-cell-27-51" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="annotated-cell-27-52"><a href="#annotated-cell-27-52" aria-hidden="true" tabindex="-1"></a>    drought_clean</span>
 <span id="annotated-cell-27-53"><a href="#annotated-cell-27-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove drought_lvl "None" &amp; filter for just CA ----</span></span>
-<span id="annotated-cell-27-54"><a href="#annotated-cell-27-54" aria-hidden="true" tabindex="-1"></a>    [<span class="kw">lambda</span> df: (df[<span class="st">"drought_lvl"</span>] <span class="op">!=</span> <span class="st">"None"</span>) <span class="op">&amp;</span> (df[<span class="st">"stateabb"</span>] <span class="op">==</span> <span class="st">"CA"</span>)] <span class="co"># FIX STATEABB</span></span>
+<span id="annotated-cell-27-54"><a href="#annotated-cell-27-54" aria-hidden="true" tabindex="-1"></a>    [<span class="kw">lambda</span> df: (df[<span class="st">"drought_lvl"</span>] <span class="op">!=</span> <span class="st">"None"</span>) <span class="op">&amp;</span> (df[<span class="st">"stateabb"</span>] <span class="op">==</span> <span class="st">"CA"</span>)] </span>
 <span id="annotated-cell-27-55"><a href="#annotated-cell-27-55" aria-hidden="true" tabindex="-1"></a>    .pipe(<span class="kw">lambda</span> df: (</span>
 <span id="annotated-cell-27-56"><a href="#annotated-cell-27-56" aria-hidden="true" tabindex="-1"></a>        ggplot(df, aes(x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"area_pct"</span>, fill<span class="op">=</span><span class="st">"drought_lvl_long"</span>))</span>
 <span id="annotated-cell-27-57"><a href="#annotated-cell-27-57" aria-hidden="true" tabindex="-1"></a>        <span class="co"># reverse order of groups so level D4 is closest to x-axis ----</span></span>
@@ -920,7 +920,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-27" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="11" data-code-annotation="1">Updated the filepath to point to the correct data source.</span>
+<span data-code-cell="annotated-cell-27" data-code-lines="11" data-code-annotation="1">Updated the file path to point to the correct data source.</span>
 </dd>
 <dt data-target-cell="annotated-cell-27" data-target-annotation="2">2</dt>
 <dd>
@@ -936,6 +936,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="center-text">
 <p><img src="../images/drought-python.png" class="img-fluid" style="width:100.0%" alt="Stacked area chart of drought area in CA by severity from 2000-2026."></p>
 </div>
+<p>There are still a few things we’d want to fix:</p>
+<ul>
+<li>the legend colors aren’t showing up</li>
+<li>we’d want to remove “No Drought” from our legend – it’s worth considering moving all data wrangling (including the filter statements, <code>[lambda df: (df["drought_lvl"] != "None") &amp; (df["stateabb"] == "CA")]</code>) out of the data viz code and into the data wrangling code</li>
+<li>fix our x-axis breaks</li>
+</ul>
 </div>
 </div>
 </div>

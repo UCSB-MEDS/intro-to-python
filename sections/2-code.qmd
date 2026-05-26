@@ -375,7 +375,7 @@ conda activate drought-env
 ```{bash filename="Terminal"}
 #| eval: false
 #| echo: true
-conda install -c conda-forge pandas plotnine ipykernel
+conda install -c conda-forge pandas plotnine ipykernel pyjanitor
 ```
 
 7. **Optionally, export your environment to an `environment.yml` file** so others can reproduce it. Use the `--from-history` flag to export only the packages you explicitly installed, rather than all of their dependencies. This makes the file more portable across operating systems; instead of locking in your machine's specific dependencies, it lets conda resolve the right ones for each user's OS.

@@ -83,7 +83,7 @@ curl -O https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercis
 conda env create -f exercise1/environment.yml
 ```
 
-3. **Activate the environment:**
+3. **Activate the environment.** You'll want to make sure you're in your correct environment (you should see `(cmip6-env)` at the start of your command line when `cmip6-env` is correctly activated) before installing packages:
 
 ```{bash filename="Terminal"}
 #| eval: false

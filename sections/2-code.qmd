@@ -99,9 +99,9 @@ conda activate cmip6-env
 python -m ipykernel install --user --name cmip6-env --display-name "Python (cmip6-env)"
 ```
 
-5. **Open `intro-to-python.ipynb` (in Positron) and select `cmip6-env` as your interpreter.** Click the interpreter selector in the top right of the Jupyter Notebook and choose `Python (cmip6-env)`. 
+5. **Open `intro-to-python.ipynb` (in Positron) and select `cmip6-env` as your interpreter.** Click the interpreter selector in the top right of the Jupyter Notebook and choose `Python (cmip6-env)`. *You may need to restart Positron to find your kernel. Shut down Positron entirely > reopen Positron > reopen your project by clicking the folder button (top right corner of Positron) and selecting your project > open your interpreter.*
 
-6. **Run through all the cells** in the Jupyter Notebook.
+6. **Run through all the cells** in the Jupyter Notebook (they *should* run!).
 
 ### Exercise 2: Translating R to Python
 

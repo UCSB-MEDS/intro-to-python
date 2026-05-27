@@ -38,7 +38,7 @@ Sometimes you'll receive Python code and an environment file (`environment.yml` 
 ::: {.callout-note collapse="true"}
 ## `environment.yml`
 
-The `environment.yml` is a text file that specifies a conda environment's name, channels to download from, and package dependencies. It is similar to a `requirements.txt` file that is used for `venv`.
+`environment.yml` is a text file that specifies a `conda` environment's name, channels to download from, and package dependencies. It's similar to the `requirements.txt` file that's used with `venv` (a virtual environment manager used in conjunction with `pip`).
 
 ```{yaml filename="environment.yml"}
 name: cmip6-env
@@ -60,7 +60,7 @@ dependencies:
 ```
 :::
 
-1. **Download the [`environment.yml`](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/environment.yml){target="_blank"} and [intro-to-python.ipynb](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/intro-to-python.ipynb){target="_blank"}** from GitHub and save them to your project directory. You can do this in the Terminal by running:
+1. **Download the [`environment.yml`](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/environment.yml){target="_blank"} and [intro-to-python.ipynb](https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/intro-to-python.ipynb){target="_blank"}** from GitHub and save them to your project directory. Do this in the Terminal by running:
 
 ```{bash filename="Terminal"}
 #| eval: false
@@ -73,7 +73,7 @@ curl -O https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercis
 curl -O https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/exercises/intro-to-python.ipynb
 ```
 
-- You can drag and drop these files into your `exercise1/` folder
+- Once downloaded, you can drag and drop these files into your `exercise1/` folder
 
 2. **Create the `cmip6-env` conda environment** from our downloaded `environment.yml` file:
 
@@ -473,5 +473,11 @@ drought_clean = (
 <!-- ![](../images/drought-python.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."} -->
 :::
 
+There are certainly a few more updates we should make to polish up this data viz, including:
+
+- setting the x-axis breaks to something a bit cleaner (ideally, years)
+- making sure the legend doesn't spill outside of our plot 
+
+We don't have time to do that today, but we encourage you to give it a try yourself!
 :::
 

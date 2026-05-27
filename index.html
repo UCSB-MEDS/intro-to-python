@@ -376,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The <code>environment.yml</code> is a text file that specifies a conda environment’s name, channels to download from, and package dependencies. It is similar to a <code>requirements.txt</code> file that is used for <code>venv</code>.</p>
+<p><code>environment.yml</code> is a text file that specifies a <code>conda</code> environment’s name, channels to download from, and package dependencies. It’s similar to the <code>requirements.txt</code> file that’s used with <code>venv</code> (a virtual environment manager used in conjunction with <code>pip</code>).</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -404,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ol type="1">
-<li><strong>Download the <a href="https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/environment.yml" target="_blank"><code>environment.yml</code></a> and <a href="https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/intro-to-python.ipynb" target="_blank">intro-to-python.ipynb</a></strong> from GitHub and save them to your project directory. You can do this in the Terminal by running:</li>
+<li><strong>Download the <a href="https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/environment.yml" target="_blank"><code>environment.yml</code></a> and <a href="https://github.com/UCSB-MEDS/intro-to-python/blob/main/exercises/intro-to-python.ipynb" target="_blank">intro-to-python.ipynb</a></strong> from GitHub and save them to your project directory. Do this in the Terminal by running:</li>
 </ol>
 <div class="cell">
 <div class="code-with-filename">
@@ -419,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>You can drag and drop these files into your <code>exercise1/</code> folder</li>
+<li>Once downloaded, you can drag and drop these files into your <code>exercise1/</code> folder</li>
 </ul>
 <ol start="2" type="1">
 <li><strong>Create the <code>cmip6-env</code> conda environment</strong> from our downloaded <code>environment.yml</code> file:</li>
@@ -881,6 +881,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="center-text">
 <p><img src="https://raw.githubusercontent.com/UCSB-MEDS/intro-to-python/main/images/drought-python.png" class="img-fluid" style="width:100.0%" alt="Stacked area chart of drought area in CA by severity from 2000-2026."> <!-- ![](../images/drought-python.png){width="100%" fig-alt="Stacked area chart of drought area in CA by severity from 2000-2026."} --></p>
 </div>
+<p>There are certainly a few more updates we should make to polish up this data viz, including:</p>
+<ul>
+<li>setting the x-axis breaks to something a bit cleaner (ideally, years)</li>
+<li>making sure the legend doesn’t spill outside of our plot</li>
+</ul>
+<p>We don’t have time to do that today, but we encourage you to give it a try yourself!</p>
 </div>
 </div>
 </div>

@@ -754,14 +754,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> exercise2/environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<!-- 8. **Register `drought-env` as a Jupyter kernel** so that Positron can find and use it as an interpreter: 
-
-
-::: {.cell filename='Terminal'}
-
-````{.bash .cell-code}
-python -m ipykernel install --user --name drought-env --display-name "Python (drought-env)"
-``` -->
 <ol start="8" type="1">
 <li><p><strong>Restart Positron, then select your interpreter</strong> by clicking the Interpreter Picker (top right corner of Positron) &gt; click New Console Session… &gt; choose the Python 3.11.14 (Conda: drought-env) interpreter.</p></li>
 <li><p><strong>Try running your <code>drought.py</code> script.</strong> <em>Your code will likely <strong>not</strong> run without some manual updates. Things to try / look out for:</em></p></li>
@@ -785,96 +777,92 @@ python -m ipykernel install --user --name drought-env --display-name "Python (dr
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>````</p>
-</div>
-</div>
-</div>
 <div class="cell" data-filetype="drought.py">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
-<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Load data ──────────────────────────────────────────────────────────────────</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();" href="">1</a><span id="annotated-cell-11-5" class="code-annotation-target"><a href="#annotated-cell-11-5" aria-hidden="true" tabindex="-1"></a>drought <span class="op">=</span> pd.read_csv(<span class="st">"exercise2/data/drought.csv"</span>)</span>
-<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Wrangle ────────────────────────────────────────────────────────────────────</span></span>
-<span id="annotated-cell-11-8"><a href="#annotated-cell-11-8" aria-hidden="true" tabindex="-1"></a>drought_clean <span class="op">=</span> (</span>
-<span id="annotated-cell-11-9"><a href="#annotated-cell-11-9" aria-hidden="true" tabindex="-1"></a>    drought</span>
-<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pivot to tidy form</span></span>
-<span id="annotated-cell-11-11"><a href="#annotated-cell-11-11" aria-hidden="true" tabindex="-1"></a>    .melt(</span>
-<span id="annotated-cell-11-12"><a href="#annotated-cell-11-12" aria-hidden="true" tabindex="-1"></a>        id_vars<span class="op">=</span>[c <span class="cf">for</span> c <span class="kw">in</span> drought.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> [<span class="st">"none"</span>, <span class="st">"d0"</span>, <span class="st">"d1"</span>, <span class="st">"d2"</span>, <span class="st">"d3"</span>, <span class="st">"d4"</span>]],</span>
-<span id="annotated-cell-11-13"><a href="#annotated-cell-11-13" aria-hidden="true" tabindex="-1"></a>        value_vars<span class="op">=</span>[<span class="st">"none"</span>, <span class="st">"d0"</span>, <span class="st">"d1"</span>, <span class="st">"d2"</span>, <span class="st">"d3"</span>, <span class="st">"d4"</span>],</span>
-<span id="annotated-cell-11-14"><a href="#annotated-cell-11-14" aria-hidden="true" tabindex="-1"></a>        var_name<span class="op">=</span><span class="st">"drought_lvl"</span>,</span>
-<span id="annotated-cell-11-15"><a href="#annotated-cell-11-15" aria-hidden="true" tabindex="-1"></a>        value_name<span class="op">=</span><span class="st">"area_pct"</span>,</span>
-<span id="annotated-cell-11-16"><a href="#annotated-cell-11-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="annotated-cell-11-17"><a href="#annotated-cell-11-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># select cols of interest</span></span>
-<span id="annotated-cell-11-18"><a href="#annotated-cell-11-18" aria-hidden="true" tabindex="-1"></a>    [[<span class="st">"start_date"</span>, <span class="st">"state_abb"</span>, <span class="st">"drought_lvl"</span>, <span class="st">"area_pct"</span>]]</span>
-<span id="annotated-cell-11-19"><a href="#annotated-cell-11-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># coerce start_date to date</span></span>
-<span id="annotated-cell-11-20"><a href="#annotated-cell-11-20" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
-<span id="annotated-cell-11-21"><a href="#annotated-cell-11-21" aria-hidden="true" tabindex="-1"></a>        start_date<span class="op">=</span><span class="kw">lambda</span> df: pd.to_datetime(df[<span class="st">"start_date"</span>]),</span>
-<span id="annotated-cell-11-22"><a href="#annotated-cell-11-22" aria-hidden="true" tabindex="-1"></a>        drought_lvl_long<span class="op">=</span><span class="kw">lambda</span> df: pd.Categorical(</span>
-<span id="annotated-cell-11-23"><a href="#annotated-cell-11-23" aria-hidden="true" tabindex="-1"></a>            df[<span class="st">"drought_lvl"</span>],</span>
-<span id="annotated-cell-11-24"><a href="#annotated-cell-11-24" aria-hidden="true" tabindex="-1"></a>            categories<span class="op">=</span>[<span class="st">"d4"</span>, <span class="st">"d3"</span>, <span class="st">"d2"</span>, <span class="st">"d1"</span>, <span class="st">"d0"</span>],</span>
-<span id="annotated-cell-11-25"><a href="#annotated-cell-11-25" aria-hidden="true" tabindex="-1"></a>            ordered<span class="op">=</span><span class="va">True</span>,</span>
-<span id="annotated-cell-11-26"><a href="#annotated-cell-11-26" aria-hidden="true" tabindex="-1"></a>        ).rename_categories({</span>
-<span id="annotated-cell-11-27"><a href="#annotated-cell-11-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d4"</span>: <span class="st">"D4 (Exceptional)"</span>,</span>
-<span id="annotated-cell-11-28"><a href="#annotated-cell-11-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d3"</span>: <span class="st">"D3 (Extreme)"</span>,</span>
-<span id="annotated-cell-11-29"><a href="#annotated-cell-11-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d2"</span>: <span class="st">"D2 (Severe)"</span>,</span>
-<span id="annotated-cell-11-30"><a href="#annotated-cell-11-30" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d1"</span>: <span class="st">"D1 (Moderate)"</span>,</span>
-<span id="annotated-cell-11-31"><a href="#annotated-cell-11-31" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d0"</span>: <span class="st">"D0 (Abnormally Dry)"</span>,</span>
-<span id="annotated-cell-11-32"><a href="#annotated-cell-11-32" aria-hidden="true" tabindex="-1"></a>        }),</span>
-<span id="annotated-cell-11-33"><a href="#annotated-cell-11-33" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="annotated-cell-11-34"><a href="#annotated-cell-11-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter out "none" drought level and keep only CA</span></span>
-<span id="annotated-cell-11-35"><a href="#annotated-cell-11-35" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"drought_lvl != 'none' and state_abb == 'CA'"</span>)</span>
-<span id="annotated-cell-11-36"><a href="#annotated-cell-11-36" aria-hidden="true" tabindex="-1"></a>    .dropna(subset<span class="op">=</span>[<span class="st">"drought_lvl_long"</span>])</span>
-<span id="annotated-cell-11-37"><a href="#annotated-cell-11-37" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="annotated-cell-11-38"><a href="#annotated-cell-11-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-11-39"><a href="#annotated-cell-11-39" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Plot ───────────────────────────────────────────────────────────────────────</span></span>
-<span id="annotated-cell-11-40"><a href="#annotated-cell-11-40" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="annotated-cell-11-41"><a href="#annotated-cell-11-41" aria-hidden="true" tabindex="-1"></a>    ggplot(drought_clean, aes(x<span class="op">=</span><span class="st">"start_date"</span>, y<span class="op">=</span><span class="st">"area_pct"</span>, fill<span class="op">=</span><span class="st">"drought_lvl_long"</span>))</span>
-<span id="annotated-cell-11-42"><a href="#annotated-cell-11-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_area(position<span class="op">=</span>position_stack(reverse<span class="op">=</span><span class="va">True</span>))</span>
-<span id="annotated-cell-11-43"><a href="#annotated-cell-11-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_manual(</span>
-<span id="annotated-cell-11-44"><a href="#annotated-cell-11-44" aria-hidden="true" tabindex="-1"></a>        values<span class="op">=</span>[<span class="st">"#853904"</span>, <span class="st">"#FF0000"</span>, <span class="st">"#FFC100"</span>, <span class="st">"#FFD965"</span>, <span class="st">"#FFFF00"</span>]</span>
-<span id="annotated-cell-11-45"><a href="#annotated-cell-11-45" aria-hidden="true" tabindex="-1"></a>    )</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2" onclick="event.preventDefault();" href="">2</a><span id="annotated-cell-11-46" class="code-annotation-target"><a href="#annotated-cell-11-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># + scale_x_datetime(</span></span>
-<span id="annotated-cell-11-47"><a href="#annotated-cell-11-47" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     breaks=date_breaks("2 years"),</span></span>
-<span id="annotated-cell-11-48"><a href="#annotated-cell-11-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     date_labels="%Y",</span></span>
-<span id="annotated-cell-11-49"><a href="#annotated-cell-11-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     limits=(pd.Timestamp("2000-01-01"), pd.Timestamp("2026-12-31")),</span></span>
-<span id="annotated-cell-11-50"><a href="#annotated-cell-11-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     expand=(0, 0),</span></span>
-<span id="annotated-cell-11-51"><a href="#annotated-cell-11-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># )</span></span>
-<span id="annotated-cell-11-52"><a href="#annotated-cell-11-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_continuous(</span>
-<span id="annotated-cell-11-53"><a href="#annotated-cell-11-53" aria-hidden="true" tabindex="-1"></a>        breaks<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">101</span>, <span class="dv">10</span>),</span>
-<span id="annotated-cell-11-54"><a href="#annotated-cell-11-54" aria-hidden="true" tabindex="-1"></a>        expand<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="annotated-cell-11-55"><a href="#annotated-cell-11-55" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span><span class="kw">lambda</span> lst: [<span class="ss">f"</span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">%"</span> <span class="cf">for</span> v <span class="kw">in</span> lst],</span>
-<span id="annotated-cell-11-56"><a href="#annotated-cell-11-56" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="annotated-cell-11-57"><a href="#annotated-cell-11-57" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Drought area in California"</span>)</span>
-<span id="annotated-cell-11-58"><a href="#annotated-cell-11-58" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
-<span id="annotated-cell-11-59"><a href="#annotated-cell-11-59" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(</span>
-<span id="annotated-cell-11-60"><a href="#annotated-cell-11-60" aria-hidden="true" tabindex="-1"></a>        axis_line<span class="op">=</span>element_line(color<span class="op">=</span><span class="st">"#5A9CD6"</span>),</span>
-<span id="annotated-cell-11-61"><a href="#annotated-cell-11-61" aria-hidden="true" tabindex="-1"></a>        axis_ticks<span class="op">=</span>element_line(color<span class="op">=</span><span class="st">"#5A9CD6"</span>),</span>
-<span id="annotated-cell-11-62"><a href="#annotated-cell-11-62" aria-hidden="true" tabindex="-1"></a>        axis_ticks_length<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="annotated-cell-11-63"><a href="#annotated-cell-11-63" aria-hidden="true" tabindex="-1"></a>        plot_title<span class="op">=</span>element_text(ha<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="annotated-cell-11-64"><a href="#annotated-cell-11-64" aria-hidden="true" tabindex="-1"></a>                                margin<span class="op">=</span>{<span class="st">"t"</span>: <span class="dv">10</span>, <span class="st">"b"</span>: <span class="dv">15</span>}),</span>
-<span id="annotated-cell-11-65"><a href="#annotated-cell-11-65" aria-hidden="true" tabindex="-1"></a>        axis_title<span class="op">=</span>element_blank(),</span>
-<span id="annotated-cell-11-66"><a href="#annotated-cell-11-66" aria-hidden="true" tabindex="-1"></a>        legend_title<span class="op">=</span>element_blank(),</span>
-<span id="annotated-cell-11-67"><a href="#annotated-cell-11-67" aria-hidden="true" tabindex="-1"></a>        axis_text<span class="op">=</span>element_text(color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">10</span>),</span>
-<span id="annotated-cell-11-68"><a href="#annotated-cell-11-68" aria-hidden="true" tabindex="-1"></a>        legend_text<span class="op">=</span>element_text(color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">10</span>),</span>
-<span id="annotated-cell-11-69"><a href="#annotated-cell-11-69" aria-hidden="true" tabindex="-1"></a>        legend_position<span class="op">=</span><span class="st">"bottom"</span>,</span>
-<span id="annotated-cell-11-70"><a href="#annotated-cell-11-70" aria-hidden="true" tabindex="-1"></a>        legend_direction<span class="op">=</span><span class="st">"horizontal"</span>,</span>
-<span id="annotated-cell-11-71"><a href="#annotated-cell-11-71" aria-hidden="true" tabindex="-1"></a>        legend_key_width<span class="op">=</span><span class="dv">12</span>,</span>
-<span id="annotated-cell-11-72"><a href="#annotated-cell-11-72" aria-hidden="true" tabindex="-1"></a>        legend_key_height<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="annotated-cell-11-73"><a href="#annotated-cell-11-73" aria-hidden="true" tabindex="-1"></a>        plot_background<span class="op">=</span>element_rect(color<span class="op">=</span><span class="st">"#686868"</span>),</span>
-<span id="annotated-cell-11-74"><a href="#annotated-cell-11-74" aria-hidden="true" tabindex="-1"></a>        plot_margin<span class="op">=</span><span class="fl">0.1</span>,</span>
-<span id="annotated-cell-11-75"><a href="#annotated-cell-11-75" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="annotated-cell-11-76"><a href="#annotated-cell-11-76" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-25"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-25-1"><a href="#annotated-cell-25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="annotated-cell-25-2"><a href="#annotated-cell-25-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="annotated-cell-25-3"><a href="#annotated-cell-25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-25-4"><a href="#annotated-cell-25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Load data ──────────────────────────────────────────────────────────────────</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-25" data-target-annotation="1" onclick="event.preventDefault();" href="">1</a><span id="annotated-cell-25-5" class="code-annotation-target"><a href="#annotated-cell-25-5" aria-hidden="true" tabindex="-1"></a>drought <span class="op">=</span> pd.read_csv(<span class="st">"exercise2/data/drought.csv"</span>)</span>
+<span id="annotated-cell-25-6"><a href="#annotated-cell-25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-25-7"><a href="#annotated-cell-25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Wrangle ────────────────────────────────────────────────────────────────────</span></span>
+<span id="annotated-cell-25-8"><a href="#annotated-cell-25-8" aria-hidden="true" tabindex="-1"></a>drought_clean <span class="op">=</span> (</span>
+<span id="annotated-cell-25-9"><a href="#annotated-cell-25-9" aria-hidden="true" tabindex="-1"></a>    drought</span>
+<span id="annotated-cell-25-10"><a href="#annotated-cell-25-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pivot to tidy form</span></span>
+<span id="annotated-cell-25-11"><a href="#annotated-cell-25-11" aria-hidden="true" tabindex="-1"></a>    .melt(</span>
+<span id="annotated-cell-25-12"><a href="#annotated-cell-25-12" aria-hidden="true" tabindex="-1"></a>        id_vars<span class="op">=</span>[c <span class="cf">for</span> c <span class="kw">in</span> drought.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> [<span class="st">"none"</span>, <span class="st">"d0"</span>, <span class="st">"d1"</span>, <span class="st">"d2"</span>, <span class="st">"d3"</span>, <span class="st">"d4"</span>]],</span>
+<span id="annotated-cell-25-13"><a href="#annotated-cell-25-13" aria-hidden="true" tabindex="-1"></a>        value_vars<span class="op">=</span>[<span class="st">"none"</span>, <span class="st">"d0"</span>, <span class="st">"d1"</span>, <span class="st">"d2"</span>, <span class="st">"d3"</span>, <span class="st">"d4"</span>],</span>
+<span id="annotated-cell-25-14"><a href="#annotated-cell-25-14" aria-hidden="true" tabindex="-1"></a>        var_name<span class="op">=</span><span class="st">"drought_lvl"</span>,</span>
+<span id="annotated-cell-25-15"><a href="#annotated-cell-25-15" aria-hidden="true" tabindex="-1"></a>        value_name<span class="op">=</span><span class="st">"area_pct"</span>,</span>
+<span id="annotated-cell-25-16"><a href="#annotated-cell-25-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="annotated-cell-25-17"><a href="#annotated-cell-25-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># select cols of interest</span></span>
+<span id="annotated-cell-25-18"><a href="#annotated-cell-25-18" aria-hidden="true" tabindex="-1"></a>    [[<span class="st">"start_date"</span>, <span class="st">"state_abb"</span>, <span class="st">"drought_lvl"</span>, <span class="st">"area_pct"</span>]]</span>
+<span id="annotated-cell-25-19"><a href="#annotated-cell-25-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># coerce start_date to date</span></span>
+<span id="annotated-cell-25-20"><a href="#annotated-cell-25-20" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="annotated-cell-25-21"><a href="#annotated-cell-25-21" aria-hidden="true" tabindex="-1"></a>        start_date<span class="op">=</span><span class="kw">lambda</span> df: pd.to_datetime(df[<span class="st">"start_date"</span>]),</span>
+<span id="annotated-cell-25-22"><a href="#annotated-cell-25-22" aria-hidden="true" tabindex="-1"></a>        drought_lvl_long<span class="op">=</span><span class="kw">lambda</span> df: pd.Categorical(</span>
+<span id="annotated-cell-25-23"><a href="#annotated-cell-25-23" aria-hidden="true" tabindex="-1"></a>            df[<span class="st">"drought_lvl"</span>],</span>
+<span id="annotated-cell-25-24"><a href="#annotated-cell-25-24" aria-hidden="true" tabindex="-1"></a>            categories<span class="op">=</span>[<span class="st">"d4"</span>, <span class="st">"d3"</span>, <span class="st">"d2"</span>, <span class="st">"d1"</span>, <span class="st">"d0"</span>],</span>
+<span id="annotated-cell-25-25"><a href="#annotated-cell-25-25" aria-hidden="true" tabindex="-1"></a>            ordered<span class="op">=</span><span class="va">True</span>,</span>
+<span id="annotated-cell-25-26"><a href="#annotated-cell-25-26" aria-hidden="true" tabindex="-1"></a>        ).rename_categories({</span>
+<span id="annotated-cell-25-27"><a href="#annotated-cell-25-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d4"</span>: <span class="st">"D4 (Exceptional)"</span>,</span>
+<span id="annotated-cell-25-28"><a href="#annotated-cell-25-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d3"</span>: <span class="st">"D3 (Extreme)"</span>,</span>
+<span id="annotated-cell-25-29"><a href="#annotated-cell-25-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d2"</span>: <span class="st">"D2 (Severe)"</span>,</span>
+<span id="annotated-cell-25-30"><a href="#annotated-cell-25-30" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d1"</span>: <span class="st">"D1 (Moderate)"</span>,</span>
+<span id="annotated-cell-25-31"><a href="#annotated-cell-25-31" aria-hidden="true" tabindex="-1"></a>            <span class="st">"d0"</span>: <span class="st">"D0 (Abnormally Dry)"</span>,</span>
+<span id="annotated-cell-25-32"><a href="#annotated-cell-25-32" aria-hidden="true" tabindex="-1"></a>        }),</span>
+<span id="annotated-cell-25-33"><a href="#annotated-cell-25-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="annotated-cell-25-34"><a href="#annotated-cell-25-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter out "none" drought level and keep only CA</span></span>
+<span id="annotated-cell-25-35"><a href="#annotated-cell-25-35" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"drought_lvl != 'none' and state_abb == 'CA'"</span>)</span>
+<span id="annotated-cell-25-36"><a href="#annotated-cell-25-36" aria-hidden="true" tabindex="-1"></a>    .dropna(subset<span class="op">=</span>[<span class="st">"drought_lvl_long"</span>])</span>
+<span id="annotated-cell-25-37"><a href="#annotated-cell-25-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="annotated-cell-25-38"><a href="#annotated-cell-25-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-25-39"><a href="#annotated-cell-25-39" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Plot ───────────────────────────────────────────────────────────────────────</span></span>
+<span id="annotated-cell-25-40"><a href="#annotated-cell-25-40" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="annotated-cell-25-41"><a href="#annotated-cell-25-41" aria-hidden="true" tabindex="-1"></a>    ggplot(drought_clean, aes(x<span class="op">=</span><span class="st">"start_date"</span>, y<span class="op">=</span><span class="st">"area_pct"</span>, fill<span class="op">=</span><span class="st">"drought_lvl_long"</span>))</span>
+<span id="annotated-cell-25-42"><a href="#annotated-cell-25-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_area(position<span class="op">=</span>position_stack(reverse<span class="op">=</span><span class="va">True</span>))</span>
+<span id="annotated-cell-25-43"><a href="#annotated-cell-25-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_manual(</span>
+<span id="annotated-cell-25-44"><a href="#annotated-cell-25-44" aria-hidden="true" tabindex="-1"></a>        values<span class="op">=</span>[<span class="st">"#853904"</span>, <span class="st">"#FF0000"</span>, <span class="st">"#FFC100"</span>, <span class="st">"#FFD965"</span>, <span class="st">"#FFFF00"</span>]</span>
+<span id="annotated-cell-25-45"><a href="#annotated-cell-25-45" aria-hidden="true" tabindex="-1"></a>    )</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-25" data-target-annotation="2" onclick="event.preventDefault();" href="">2</a><span id="annotated-cell-25-46" class="code-annotation-target"><a href="#annotated-cell-25-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># + scale_x_datetime(</span></span>
+<span id="annotated-cell-25-47"><a href="#annotated-cell-25-47" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     breaks=date_breaks("2 years"),</span></span>
+<span id="annotated-cell-25-48"><a href="#annotated-cell-25-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     date_labels="%Y",</span></span>
+<span id="annotated-cell-25-49"><a href="#annotated-cell-25-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     limits=(pd.Timestamp("2000-01-01"), pd.Timestamp("2026-12-31")),</span></span>
+<span id="annotated-cell-25-50"><a href="#annotated-cell-25-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     expand=(0, 0),</span></span>
+<span id="annotated-cell-25-51"><a href="#annotated-cell-25-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># )</span></span>
+<span id="annotated-cell-25-52"><a href="#annotated-cell-25-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_continuous(</span>
+<span id="annotated-cell-25-53"><a href="#annotated-cell-25-53" aria-hidden="true" tabindex="-1"></a>        breaks<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">101</span>, <span class="dv">10</span>),</span>
+<span id="annotated-cell-25-54"><a href="#annotated-cell-25-54" aria-hidden="true" tabindex="-1"></a>        expand<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="annotated-cell-25-55"><a href="#annotated-cell-25-55" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span><span class="kw">lambda</span> lst: [<span class="ss">f"</span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">%"</span> <span class="cf">for</span> v <span class="kw">in</span> lst],</span>
+<span id="annotated-cell-25-56"><a href="#annotated-cell-25-56" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="annotated-cell-25-57"><a href="#annotated-cell-25-57" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Drought area in California"</span>)</span>
+<span id="annotated-cell-25-58"><a href="#annotated-cell-25-58" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="annotated-cell-25-59"><a href="#annotated-cell-25-59" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(</span>
+<span id="annotated-cell-25-60"><a href="#annotated-cell-25-60" aria-hidden="true" tabindex="-1"></a>        axis_line<span class="op">=</span>element_line(color<span class="op">=</span><span class="st">"#5A9CD6"</span>),</span>
+<span id="annotated-cell-25-61"><a href="#annotated-cell-25-61" aria-hidden="true" tabindex="-1"></a>        axis_ticks<span class="op">=</span>element_line(color<span class="op">=</span><span class="st">"#5A9CD6"</span>),</span>
+<span id="annotated-cell-25-62"><a href="#annotated-cell-25-62" aria-hidden="true" tabindex="-1"></a>        axis_ticks_length<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="annotated-cell-25-63"><a href="#annotated-cell-25-63" aria-hidden="true" tabindex="-1"></a>        plot_title<span class="op">=</span>element_text(ha<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="annotated-cell-25-64"><a href="#annotated-cell-25-64" aria-hidden="true" tabindex="-1"></a>                                margin<span class="op">=</span>{<span class="st">"t"</span>: <span class="dv">10</span>, <span class="st">"b"</span>: <span class="dv">15</span>}),</span>
+<span id="annotated-cell-25-65"><a href="#annotated-cell-25-65" aria-hidden="true" tabindex="-1"></a>        axis_title<span class="op">=</span>element_blank(),</span>
+<span id="annotated-cell-25-66"><a href="#annotated-cell-25-66" aria-hidden="true" tabindex="-1"></a>        legend_title<span class="op">=</span>element_blank(),</span>
+<span id="annotated-cell-25-67"><a href="#annotated-cell-25-67" aria-hidden="true" tabindex="-1"></a>        axis_text<span class="op">=</span>element_text(color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">10</span>),</span>
+<span id="annotated-cell-25-68"><a href="#annotated-cell-25-68" aria-hidden="true" tabindex="-1"></a>        legend_text<span class="op">=</span>element_text(color<span class="op">=</span><span class="st">"#686868"</span>, size<span class="op">=</span><span class="dv">10</span>),</span>
+<span id="annotated-cell-25-69"><a href="#annotated-cell-25-69" aria-hidden="true" tabindex="-1"></a>        legend_position<span class="op">=</span><span class="st">"bottom"</span>,</span>
+<span id="annotated-cell-25-70"><a href="#annotated-cell-25-70" aria-hidden="true" tabindex="-1"></a>        legend_direction<span class="op">=</span><span class="st">"horizontal"</span>,</span>
+<span id="annotated-cell-25-71"><a href="#annotated-cell-25-71" aria-hidden="true" tabindex="-1"></a>        legend_key_width<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="annotated-cell-25-72"><a href="#annotated-cell-25-72" aria-hidden="true" tabindex="-1"></a>        legend_key_height<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="annotated-cell-25-73"><a href="#annotated-cell-25-73" aria-hidden="true" tabindex="-1"></a>        plot_background<span class="op">=</span>element_rect(color<span class="op">=</span><span class="st">"#686868"</span>),</span>
+<span id="annotated-cell-25-74"><a href="#annotated-cell-25-74" aria-hidden="true" tabindex="-1"></a>        plot_margin<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="annotated-cell-25-75"><a href="#annotated-cell-25-75" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="annotated-cell-25-76"><a href="#annotated-cell-25-76" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-25" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="5" data-code-annotation="1">Updated the file path (our working directory is the project root, rather than where <code>drought.py</code> lives)</span>
+<span data-code-cell="annotated-cell-25" data-code-lines="5" data-code-annotation="1">Updated the file path (our working directory is the project root, rather than where <code>drought.py</code> lives)</span>
 </dd>
-<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-25" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="46" data-code-annotation="2">Running the code line-by-line reveals a <code>NameError: name 'date_breaks' is not defined.</code> when we add in these lines of code. Asking claude.ai to explain the error helps us understand that <code>date_breaks</code> isn’t exported by <code>from plotnine import *</code>, but rather lives in <code>mizani</code>, the underlying scales/formatting dependency. It can be installed via <code>conda install -c conda-forge mizani</code>. For now, we chose to comment out these lines of code to first get a working plot.</span>
+<span data-code-cell="annotated-cell-25" data-code-lines="46" data-code-annotation="2">Running the code line-by-line reveals a <code>NameError: name 'date_breaks' is not defined.</code> when we add in these lines of code. Asking claude.ai to explain the error helps us understand that <code>date_breaks</code> isn’t exported by <code>from plotnine import *</code>, but rather lives in <code>mizani</code>, the underlying scales/formatting dependency. It can be installed via <code>conda install -c conda-forge mizani</code>. For now, we chose to comment out these lines of code to first get a working plot.</span>
 </dd>
 </dl>
 </div>
@@ -887,7 +875,10 @@ python -m ipykernel install --user --name drought-env --display-name "Python (dr
 <li>setting the x-axis breaks to something a bit cleaner (ideally, years)</li>
 <li>making sure the legend doesn’t spill outside of our plot</li>
 </ul>
-<p>We don’t have time to do that today, but we encourage you to give it a try yourself! :::</p>
+<p>We don’t have time to do that today, but we encourage you to give it a try yourself!</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="contribute" class="level2">

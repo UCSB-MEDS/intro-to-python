@@ -362,14 +362,6 @@ conda install -c conda-forge pandas plotnine ipykernel
 conda env export --from-history > exercise2/environment.yml
 ```
 
-<!-- 8. **Register `drought-env` as a Jupyter kernel** so that Positron can find and use it as an interpreter: 
-
-```{bash filename="Terminal"}
-#| eval: false
-#| echo: true
-python -m ipykernel install --user --name drought-env --display-name "Python (drought-env)"
-``` -->
-
 8. **Restart Positron, then select your interpreter** by clicking the Interpreter Picker (top right corner of Positron) > click New Console Session... > choose the Python 3.11.14 (Conda: drought-env) interpreter.
 
 9. **Try running your `drought.py` script.** *Your code will likely **not** run without some manual updates. Things to try / look out for:*
